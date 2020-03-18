@@ -2,10 +2,53 @@
     "Categories": [
         { "Name": ".NET Core", "Link": "dotnetcore" }, 
         { "Name": ".NET Framework", "Link": "netframework" }, 
+        { "Name": "ASP.NET", "Link": "aspdotnet" }, 
         { "Name": "IIS & IIS Express", "Link": "iis" }, 
         { "Name": "Other", "Link": "other" }
     ],
     "Articles": [
+        {
+            "Title":  "Adding Mime Types to IIS Express",
+            "Markdown":  "# Adding Mime Types to IIS Express\r\n---\r\n\r\nOpen command prompt with administrator privilages.\r\nChange Directory to either;\r\n\r\n`C:\\Program Files\\IIS Express` or `C:\\Program Files (x86)\\IIS Express`\r\n\r\nRun following command to add `JSON` file extension.\r\n\r\n```bat\r\nappcmd set config /section:staticContent /+[fileExtension=\u0027.json\u0027,mimeType=\u0027application/x-javascript\u0027]\r\n```\r\n\r\nAlso, could browse and edit file located here: \r\n\r\n`C:\\Users\\\u003cUSERPROFILE\u003e\\Documents\\IISExpress\\config\\applicationhost.config`\r\n\r\nSearch for `staticContent` and add the following to allow JSON files to be process.\r\n\r\n```xml\r\n\u003cstaticContent\u003e\r\n    ...\r\n    \u003cmimeMap fileExtension=\".json\" mimeType=\"text/x-javascript\" /\u003e\r\n\u003c/staticContent\u003e    \r\n```",
+            "Link":  "adding-mime-types-to-iis-express",
+            "Created":  "8/27/2019",
+            "Category":  "iis"
+        },
+        {
+            "Title":  "Ajax Control ToolKit",
+            "Markdown":  "# Ajax Control ToolKit\r\n\r\n## How to use the Auto-Complete Extender\r\nThe below sample is to demostrate how to setup a auto-complete feature. You may see these in textboxes for searching, etc.\r\n\r\n```vb\r\nProtected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load\r\n    If Not IsPostBack Then\r\n        ...\r\n    End If\r\n\r\n    \u0027below is use with AJAXToolkit to pass a third param to filter the sql results\r\n    txtPickupFacility_AutoCompleteExtender.ContextKey = DropDown1.SelectedValue\r\nEnd Sub\r\n```\r\n\r\n```vb\r\n#Region \"WebMethods\"\r\n    \u0027\u003ccc1:AutoCompleteExtender ID=\"txtPickupFacility_AutoCompleteExtender\" runat=\"server\" CompletionInterval=\"500\"\r\n    \u0027    CompletionSetCount=\"25\" DelimiterCharacters=\"\" Enabled=\"True\" MinimumPrefixLength=\"1\"\r\n    \u0027    ServiceMethod=\"GetPickupFacilityList\" TargetControlID=\"txtPickupFacility\" UseContextKey=\"true\" \u003e\r\n    \u0027\u003c/cc1:AutoCompleteExtender\u003e\r\n\r\n    \u0027THE contextKey is assigned from code-behind.\r\n    \u003cSystem.Web.Services.WebMethod(True)\u003e\r\n    \u003cSystem.Web.Script.Services.ScriptMethod()\u003e\r\n    Public Shared Function GetPickupFacilityList(ByVal prefixText As String, ByVal count As Integer, ByVal contextKey As String) As System.String()\r\n        Dim sql As String = \"SELECT PickupFacility FROM Request WHERE UserId = @UserId AND (PickupFacility LIKE @PickupFacility) ORDER BY PickupFacility\"\r\n\r\n\r\n        Dim da As System.Data.SqlClient.SqlDataAdapter = New System.Data.SqlClient.SqlDataAdapter(sql, ConfigurationManager.ConnectionStrings(\"db\").ConnectionString)\r\n        da.SelectCommand.Parameters.Add(\"@UserId\", SqlDbType.Int).Value = CInt(contextKey)\r\n        da.SelectCommand.Parameters.Add(\"@PickupFacility\", SqlDbType.VarChar, 50).Value = prefixText + \"%\"\r\n        Dim dt As DataTable = New DataTable()\r\n        da.Fill(dt)\r\n\r\n        Dim items As String()\r\n        ReDim items(dt.Rows.Count - 1)\r\n\r\n        Dim i As Integer = 0\r\n        For Each dr As DataRow In dt.Rows\r\n            items(i) = dr(0).ToString()\r\n            i = i + 1\r\n        Next\r\n\r\n        Return items\r\n    End Function\r\n#End Region\r\n```",
+            "Link":  "ajax-control-toolKit",
+            "Created":  "9/30/2019",
+            "Category":  "aspdotnet"
+        },
+        {
+            "Title":  "Convert Hex string to Char string",
+            "Markdown":  "# Convert Hex string to Char string\r\n\r\nFrom Javascript:\r\n\r\n```js\r\nvar value = String.fromCharCode(\"0x2265\");\r\n```\r\n\r\nFrom C#:\r\n\r\n```c#\r\nstring value = (char)Int16.Parse(\"0x2265\", System.Globalization.NumberStyles.AllowHexSpecifier) ;\r\n\r\nstring value = (char)Int16.Parse(\"2265\", System.Globalization.NumberStyles.AllowHexSpecifier);\r\n```",
+            "Link":  "convert-hex-string-to-char-string",
+            "Created":  "3-18-2020",
+            "Category":  "other"
+        },
+        {
+            "Title":  "FileSystemWatcher",
+            "Markdown":  "# FileSystemWatcher\r\n---\r\nFileSystemWatcher is a Microsoft [class](https://docs.microsoft.com/en-us/dotnet/api/system.io.filesystemwatcher?view=netframework-4.8). \r\n\r\nNeeded the ability to watch changes for a directory of Typescript files. Below is an example from a console application I was playing with.\r\n\r\n\u003e NOTE: FileSystemWatcher will not fired when both Modfied Date and Last Access date are update together\r\n\r\n```csharp\r\n[System.Security.Permissions.PermissionSet(System.Security.Permissions.SecurityAction.Demand, Name = \"FullTrust\")]\r\nstatic void Main(string[] args)\r\n{\r\n    System.IO.FileSystemWatcher watcher = new System.IO.FileSystemWatcher\r\n    {\r\n        Path = @\"C:\\Directory\\\",\r\n        NotifyFilter = System.IO.NotifyFilters.LastWrite,\r\n        Filter = \"*.txt\",\r\n        IncludeSubdirectories = false\r\n    };\r\n\r\n    watcher.Error += OnError;\r\n    watcher.Changed += new System.IO.FileSystemEventHandler(OnChanged);\r\n    watcher.EnableRaisingEvents = true;\r\n\r\n\r\n    // Wait for the user to quit the program.\r\n    System.Console.WriteLine(\"Press \\\u0027q\\\u0027 to quit the sample.\");\r\n    while (System.Console.Read() != \u0027q\u0027) ;\r\n}\r\n\r\n\r\nprivate static void OnChanged(object source, System.IO.FileSystemEventArgs e)\r\n{\r\n    watcher.EnableRaisingEvents = false;\r\n\r\n    //TODO: Your Code Here ----\u003e\r\n\r\n    watcher.EnableRaisingEvents = true;\r\n}\r\n\r\nstatic void OnError(object sender, System.IO.ErrorEventArgs e)\r\n{\r\n    System.Exception ex = e.GetException();\r\n    System.Console.WriteLine(ex.Message);\r\n    if (ex.InnerException != null)\r\n    {\r\n        System.Console.WriteLine(ex.InnerException);\r\n    }\r\n}\r\n```",
+            "Link":  "file-system-watcher",
+            "Created":  "3-18-2020",
+            "Category":  "dotnetframework"
+        },
+        {
+            "Title":  "Launch IIS Express via Command Prompt",
+            "Markdown":  "# Launch IIS Express via Command Prompt\r\n---\r\nOften times I needed to host and test a web site locally. IIS Express installs with Visual Studio, does this very thing.\r\n\r\nSite Ids can be listed by viewing the `applicationhost.config` file.\r\n\r\nOpen command prompt.\r\n```bat\r\n@\"C:\\Program Files (x86)\\IIS Express\\iisexpress.exe\" /systray:true /config:C:\\Users\\\u003cUSERPROFILE\u003e\\Documents\\IISExpress\\config\\applicationhost.config /siteid:1\r\n```",
+            "Link":  "launch-iis-express-via-command-prompt",
+            "Created":  "3-18-2020",
+            "Category":  "other"
+        },
+        {
+            "Title":  "Conditional Targeting Other Frameworks",
+            "Markdown":  "# Conditional Targeting other frameworks\r\nBelow are some example how to conditionaling target other frameworks when building in .NET Core\r\n\r\n```xml\r\n\u003cItemGroup Condition=\" \u0027$(TargetFramework)\u0027 == \u0027net461\u0027 OR \u0027$(TargetFramework)\u0027 == \u0027net46\u0027 OR \u0027$(TargetFramework)\u0027 == \u0027net452\u0027 OR \u0027$(TargetFramework)\u0027 == \u0027net451\u0027 OR \u0027$(TargetFramework)\u0027 == \u0027net45\u0027\"\u003e\r\n\u003c!-- // HttpClient for full .NET --\u003e\r\n\u003cReference Include=\"System.Net.Http\" /\u003e\r\n\u003cReference Include=\"System.Web\" /\u003e\r\n\u003c/ItemGroup\u003e\r\n\r\n\u003cItemGroup Condition=\" \u0027$(TargetFramework)\u0027 == \u0027netstandard2.0\u0027 OR \u0027$(TargetFramework)\u0027 == \u0027netcoreapp2.1\u0027 \"\u003e\r\n\u003c!-- // HttpClient for .NET Core --\u003e\r\n\u003c!--\u003cPackageReference Include=\"System.Net.Http\" Version=\"4.3.3\" /\u003e--\u003e\r\n\u003c/ItemGroup\u003e\r\n```",
+            "Link":  "conditional-targeting-other-frameworks",
+            "Created":  "3-18-2020",
+            "Category":  "dotnetcore"
+        },
         {
             "Title":  "Welcome Page",
             "Markdown":  "# Welcome\r\n\r\n\u003e This is a blockquote\r\n\r\n*Sample Code Snippet*\r\n```js\r\nfunction TEST() {\r\n    console.log(\"Hello World\");\r\n}\r\n```\r\n",

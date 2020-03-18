@@ -72,4 +72,4 @@ Param ([string]$DirPath)
     }
 }
 
-Get-Markdown -DirPath "C:\Users\KDJ\Desktop\blogger\articles\"
+Get-Markdown -DirPath "C:\articles\"
