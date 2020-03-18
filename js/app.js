@@ -12,7 +12,7 @@
             AppName: "Vue-Blogger",
             FullAppName: "Vue Blogger",
             Description: "Blogging site built upon Vue Js",
-            BaseURL: "http://localhost:8080/",
+            BaseURL: "/",
             Version: "0.0.0.0",
             VersionDate: "2020-01-01T00:00:00Z",
             Enviroment: "== LOCAL == LOCAL == LOCAL =="
