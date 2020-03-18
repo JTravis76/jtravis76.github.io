@@ -1,0 +1,17 @@
+{
+    "Categories": [
+        { "Name": ".NET Core", "Link": "dotnetcore" }, 
+        { "Name": ".NET Framework", "Link": "netframework" }, 
+        { "Name": "IIS & IIS Express", "Link": "iis" }, 
+        { "Name": "Other", "Link": "other" }
+    ],
+    "Articles": [
+        {
+            "Title":  "Welcome Page",
+            "Markdown":  "# Welcome\r\n\r\n\u003e This is a blockquote\r\n\r\n*Sample Code Snippet*\r\n```js\r\nfunction TEST() {\r\n    console.log(\"Hello World\");\r\n}\r\n```\r\n",
+            "Link":  "welcome-page",
+            "Created":  "3-18-2020",
+            "Category":  "other"
+        }
+    ]
+}
