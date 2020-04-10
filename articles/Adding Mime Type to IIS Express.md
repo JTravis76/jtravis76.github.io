@@ -1,6 +1,5 @@
 #meta-start
 Title:Adding Mime Types to IIS Express
-Link:adding-mime-types-to-iis-express
 Created:8/27/2019
 Category:iis
 #meta-end

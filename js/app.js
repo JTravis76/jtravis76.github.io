@@ -164,8 +164,10 @@
             Articles: []
         },
         mutations: {
-            UpdateState: function(state, payload) {
+            Categories: function(state, payload) {
                 state.Categories = payload.Categories;
+            },
+            Articles: function(state, payload) {
                 state.Articles = payload.Articles;
             },
             AdjustBreadcrumb: function(state, payload) {
@@ -218,9 +220,14 @@
         },
         created: function() {
             let vm = this;
-            this.$http.get("db/data.json").then(function(resp) {
-                vm.$store.commit("UpdateState", resp.data);
-            });
+            this.$http.all([
+                this.$http.get("db/categories.json"),
+                this.$http.get("db/articles.json")
+            ])
+                .then(vm.$http.spread(function(cat, art) {
+                    vm.$store.commit("Categories", cat.data);
+                    vm.$store.commit("Articles", art.data);
+                }));
         },
         router: router,
         store: store,

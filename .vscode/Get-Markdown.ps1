@@ -7,7 +7,7 @@
 Function Get-Markdown
 {
 [cmdletbinding()]
-Param ([string]$DirPath)
+Param ([string]$DirPath, [string]$OutPath)
     Process
     {
         Clear-Host
@@ -45,6 +45,12 @@ Param ([string]$DirPath)
                 {
                     $s = $line -split ":"
                     $obj.Add($s[0], $s[1])
+
+                    if ($s[0] -eq "Title")
+                    {
+                        # add alias link
+                        $obj.Add("Link", $s[1].Replace(" ", "-").ToLower())
+                    }
                 }
                 if ($line -eq "#meta-start")
                 {
@@ -56,7 +62,7 @@ Param ([string]$DirPath)
             {
                 $obj.Add("Category", "other")
                 $obj.Add("Title", $file.Name)
-                $obj.Add("Link", $file.Name.Replace(" ", "-").ToLower())
+                #$obj.Add("Link", $file.Name.Replace(" ", "-").ToLower())
                 $obj.Add("Created", "")
             }
 
@@ -64,12 +70,18 @@ Param ([string]$DirPath)
             $db += $obj
         }
 
-        $json = $db | ConvertTo-Json
+        #wrap database
+        $articles = @{}
+        $articles.Add("Articles", $db)
+
+        $json = $articles | ConvertTo-Json
         #Write-Host $json
 
         <#== Copy results into the master db.json ==#>
-        New-Item -Path $DirPath -Name "_articles.json" -ItemType "file" -Value $json -Force    
+        New-Item -Path $OutPath -Name "articles.json" -ItemType "file" -Value $json -Force    
     }
 }
 
-Get-Markdown -DirPath "C:\articles\"
+$in = "C:\articles"
+$out = "C:\db"
+Get-Markdown -DirPath $in -OutPath $out

@@ -1,8 +1,7 @@
 #meta-start
 Title:Launch IIS Express via Command Prompt
-Link:launch-iis-express-via-command-prompt
 Created:3-18-2020
-Category:other
+Category:iis
 #meta-end
 # Launch IIS Express via Command Prompt
 ---

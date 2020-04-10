@@ -1,6 +1,5 @@
 #meta-start
 Title:Convert Hex string to Char string
-Link:convert-hex-string-to-char-string
 Created:3-18-2020
 Category:other
 #meta-end

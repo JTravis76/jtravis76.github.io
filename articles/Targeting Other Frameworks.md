@@ -1,6 +1,5 @@
 #meta-start
 Title:Conditional Targeting Other Frameworks
-Link:conditional-targeting-other-frameworks
 Created:3-18-2020
 Category:dotnetcore
 #meta-end

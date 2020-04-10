@@ -1,6 +1,5 @@
 #meta-start
 Title:Welcome Page
-Link:welcome-page
 Created:3-18-2020
 Category:other
 #meta-end
