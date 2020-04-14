@@ -3,6 +3,7 @@
         { "Name": ".NET Core", "Link": "dotnetcore" }, 
         { "Name": ".NET Framework", "Link": "netframework" }, 
         { "Name": "ASP.NET", "Link": "aspdotnet" }, 
+        { "Name": "Git & Github", "Link": "git" }, 
         { "Name": "IIS & IIS Express", "Link": "iis" }, 
         { "Name": "Other", "Link": "other" }
     ]
