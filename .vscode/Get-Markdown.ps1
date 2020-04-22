@@ -13,7 +13,7 @@ Param ([string]$DirPath, [string]$OutPath)
         Clear-Host
 
         $dir = Get-ChildItem $DirPath -Recurse
-        $list = $dir | where {$_.Extension -eq ".md"}
+        $list = $dir | Where-Object {$_.Extension -eq ".md"}
 
         #= Create an empty array
         $db = @()
@@ -74,7 +74,7 @@ Param ([string]$DirPath, [string]$OutPath)
         $articles = @{}
         $articles.Add("Articles", $db)
 
-        $json = $articles | ConvertTo-Json
+        $json = $articles | ConvertTo-Json -Compress
         #Write-Host $json
 
         <#== Copy results into the master db.json ==#>
@@ -82,6 +82,6 @@ Param ([string]$DirPath, [string]$OutPath)
     }
 }
 
-$in = "C:\articles"
-$out = "C:\db"
+$in = "articles"
+$out = "db"
 Get-Markdown -DirPath $in -OutPath $out

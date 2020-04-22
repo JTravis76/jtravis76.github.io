@@ -19,6 +19,19 @@
                 "showReuseMessage": true,
                 "clear": false
             }
+        },
+        {
+            "label": "Build Article Database",
+            "command": "powershell",
+            "args": [ 
+                "-ExecutionPolicy",
+                "Unrestricted",
+                "-NoProfile",
+                "-File",
+                ".\\.vscode\\Get-Markdown.ps1" 
+            ],
+            "group": "none"
+            
         }
     ]
 }
