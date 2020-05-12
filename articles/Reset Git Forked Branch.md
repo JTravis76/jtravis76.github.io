@@ -4,7 +4,7 @@ Created:3-18-2020
 Category:git
 #meta-end
 # Reset a Forked Git branch
----
+
 While collaborating with fellow developers on Github, I find myself needing to updated my fork repository to match the original owner's repository. This is important to maintain clean up-to-date code while adding new features and bug fixes, especially after a pull request has been completed.
 
 > Will need to have git installed. [link](https://git-scm.com/)
@@ -16,7 +16,7 @@ All steps are performed on MS Windows:
 * Right-click to open context menu
 * Left-click `Git Bash here`
 * Type in `git clone ` and then paste in url you copied earlier, press Enter key
-    * ![image](./img/git-fig1.png)
+    * ![image](./articles/img/git-fig1.png)
 * Once download completes, open internet browser to the original owner's repo that was forked.
 * Copy "Clone with HTTPS" web url. _Must be owner's repo, not your forked repo._
 * Back in Git Bash, type in the following: **Be sure to CD (Change Directory) into the downloaded repo directory**

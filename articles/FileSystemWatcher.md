@@ -4,7 +4,7 @@ Created:3-18-2020
 Category:dotnetframework
 #meta-end
 # FileSystemWatcher
----
+
 FileSystemWatcher is a Microsoft [class](https://docs.microsoft.com/en-us/dotnet/api/system.io.filesystemwatcher?view=netframework-4.8). 
 
 Needed the ability to watch changes for a directory of Typescript files. Below is an example from a console application I was playing with.

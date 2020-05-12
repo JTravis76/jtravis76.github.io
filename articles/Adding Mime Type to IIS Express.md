@@ -4,7 +4,6 @@ Created:8/27/2019
 Category:iis
 #meta-end
 # Adding Mime Types to IIS Express
----
 
 Open command prompt with administrator privilages.
 Change Directory to either;

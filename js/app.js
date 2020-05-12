@@ -1,4 +1,4 @@
-(function (Vue, VueRouter, Vuex, axios, markdownit) {
+(function (Vue, VueRouter, Vuex, axios, markdownit, hljs) {
     'use strict';
 
     Vue = Vue && Vue.hasOwnProperty('default') ? Vue['default'] : Vue;
@@ -13,6 +13,7 @@
             FullAppName: "Vue Blogger",
             Description: "Blogging site built upon Vue Js",
             BaseURL: "https://jtravis76.github.io/",
+            //BaseURL: "./",
             Version: "0.0.0.0",
             VersionDate: "2020-01-01T00:00:00Z",
             Enviroment: "== LOCAL == LOCAL == LOCAL =="
@@ -35,7 +36,7 @@
     };
     var Categories = {
         name: "categories-page",
-        template: "<div> <div class=\"columns\"> <template v-for=\"cat in categories\"> <div class=\"column\"> <router-link :to=\"{ path: '/categories/' + cat.Link }\"> <div class=\"category\">{{cat.Name}}</div> </router-link> </div> </template> </div> <router-view></router-view> </div>",
+        template: "<div> <div class=\"columns is-multiline\"> <template v-for=\"cat in categories\"> <div class=\"column\"> <router-link :to=\"{ path: '/categories/' + cat.Link }\"> <div class=\"category\">{{cat.Name}}</div> </router-link> </div> </template> </div> <router-view></router-view> </div>",
         computed: {
             categories: function() {
                 return this.$store.state.Categories;
@@ -68,7 +69,7 @@
     };
     var Article = {
         name: "article-page",
-        template: "<div class=\"container\"> <div class=\"columns\"> <div class=\"column is-12\"> <div class=\"markdown\" v-html=\"markdown\"></div> </div> </div> </div>",
+        template: "<div class=\"container\"> <div class=\"columns\"> <div class=\"column is-12\"> <article class=\"markdown-body\" v-html=\"markdown\"></article> </div> </div> </div>",
         computed: {
             markdown: function() {
                 let vm = this;
@@ -80,8 +81,23 @@
                 }
                 return "<div>ERROR: Article link is broken</div>"
             }
+        },
+        created: function(){
+            this.$nextTick(() => {
+                HighlightCode();
+            });
+        },
+        updated: function() {
+            this.$nextTick(() => {
+                HighlightCode();
+            });
         }
     };
+    var HighlightCode = function() {
+        document.querySelectorAll('pre code').forEach((block) => {
+            hljs.highlightBlock(block);
+          });
+    }
     // var MyApp = {
     //     name: "my-app",
     //     template: "<div>Welcome! Use this to build a starting layout with Vue render option</div>"
@@ -259,4 +275,4 @@
         }
       
     });
-}(Vue, VueRouter, Vuex, axios, markdownit));
+}(Vue, VueRouter, Vuex, axios, markdownit, hljs));
