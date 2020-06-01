@@ -13,3 +13,10 @@ Open command prompt.
 ```bat
 @"C:\Program Files (x86)\IIS Express\iisexpress.exe" /systray:true /config:C:\Users\<USERPROFILE>\Documents\IISExpress\config\applicationhost.config /siteid:1
 ```
+
+Other command switches:
+
+```bat
+/path:C:\inetpub\wwwroot\
+/port:8888
+```

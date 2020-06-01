@@ -3,9 +3,11 @@
         { "Name": ".NET Core", "Link": "dotnetcore" }, 
         { "Name": ".NET Framework", "Link": "netframework" }, 
         { "Name": "ASP.NET", "Link": "aspdotnet" }, 
-        { "Name": "Microsoft Azure DevOps", "Link": "azure" }, 
         { "Name": "Git & Github", "Link": "git" }, 
         { "Name": "IIS & IIS Express", "Link": "iis" }, 
+        { "Name": "Microsoft Azure DevOps", "Link": "azure" }, 
+        { "Name": "Node JS", "Link": "node" },
+        { "Name": "Powershell", "Link": "pshell" },
         { "Name": "Visual Studio", "Link": "visualstudio" },
         { "Name": "Other", "Link": "other" }
     ]

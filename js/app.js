@@ -7,13 +7,13 @@
     axios = axios && axios.hasOwnProperty('default') ? axios['default'] : axios;
     markdownit = markdownit && markdownit.hasOwnProperty('default') ? markdownit['default'] : markdownit;
 
+    var isDev = (window.location.hostname.indexOf("localhost") > -1);
     var config = {
         state: {
             AppName: "Vue-Blogger",
             FullAppName: "Vue Blogger",
             Description: "Blogging site built upon Vue Js",
-            BaseURL: "https://jtravis76.github.io/",
-            //BaseURL: "./",
+            BaseURL: isDev ? "./" : "https://jtravis76.github.io/",
             Version: "0.0.0.0",
             VersionDate: "2020-01-01T00:00:00Z",
             Enviroment: "== LOCAL == LOCAL == LOCAL =="
