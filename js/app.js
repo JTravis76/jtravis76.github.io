@@ -98,6 +98,57 @@
             hljs.highlightBlock(block);
           });
     }
+    //Credit goes //https://medium.com/fullstackio/tutorial-shuffle-a-deck-of-cards-in-vue-js-b65da4c59b1\
+    var CardSuffle = {
+        name: "card-shuffle",
+        template: "<div class=\"columns card-table\"> <div class=\"column is-12\"> <div class=\"count-section\"> # of Shuffles: {{shuffleCount}} </div> <div class=\"speed-buttons\"> <button v-for=\"type in shuffleTypes\" class=\"button is-dark\" v-bind:disabled=\"shuffleSpeed == 'shuffle'+type\" @click=\"shuffleSpeed = 'shuffle'+type\">{{type}}</button> </div> <div class=\"main-buttons\"> <button v-if=\"isDeckShuffled\" @click=\"displayInitialDeck\" class=\"button is-warning\">Reset &nbsp;<i class=\"fa fa-undo\"></i></button> <button @click=\"shuffleDeck\" class=\"button is-primary\">Shuffle &nbsp;<i class=\"fa fa-random\"></i></button> </div> <transition-group :name=\"shuffleSpeed\" tag=\"div\" class=\"deck\"> <div class=\"card\" v-for=\"card in cards\" :key=\"card.id\" v-bind:class=\"suitColor[card.suit]\"> <span class=\"card-suit card-suit-top\">{{card.suit}}</span> <span class=\"card-number\">{{card.rank}} </span> <span class=\"card-suit card-suit-bottom\">{{card.suit}}</span> </div> </transition-group> </div> </div>",
+        data: function() {
+            return {
+                ranks: ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'],
+                suits: ['♥', '♦', '♠', '♣'],
+                cards: [],
+                suitColor: {'♠': 'black','♣': 'black','♦': 'red','♥': 'red'},
+                shuffleSpeed: 'shuffleMedium',
+                shuffleTypes: ['Slow', 'Medium', 'Fast'],
+                isDeckShuffled: false,
+                shuffleCount: 0,
+            }
+        },
+        created() {
+            this.displayInitialDeck();
+        },
+        methods: {
+            displayInitialDeck() {
+                let id = 1;
+                this.cards = [];
+    
+                for (let s = 0; s < this.suits.length; s++) {
+                    for (let r = 0; r < this.ranks.length; r++) {
+                        let card = {
+                            id: id,
+                            rank: this.ranks[r],
+                            suit: this.suits[s]
+                        }
+    
+                        this.cards.push(card);
+                        id++;
+                    }
+                }
+            },
+            shuffleDeck() {
+                for (let i = this.cards.length - 1; i > 0; i--) {
+                    let randomIndex = Math.floor(Math.random() * i);
+    
+                    let temp = this.cards[i];
+                    this.$set(this.cards, i, this.cards[randomIndex]);
+                    this.$set(this.cards, randomIndex, temp);
+                }
+    
+                this.isDeckShuffled = true;
+                this.shuffleCount = this.shuffleCount + 1;
+            }
+        }
+    }
     // var MyApp = {
     //     name: "my-app",
     //     template: "<div>Welcome! Use this to build a starting layout with Vue render option</div>"
@@ -156,7 +207,8 @@
                 { path: "/categories/:cat", name: "Categories ", component: CategoryArticles },
                 { path: "/categories/:cat/:art", name: "Categories  ", component: Article }
             ]
-        }
+        },
+        { path: "/cards", component: CardSuffle }
     ];
     var router = new VueRouter({
         routes: routes,

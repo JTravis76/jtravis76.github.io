@@ -136,3 +136,112 @@ section {
 
 [v-cloak] {
     display: none; }
+
+/* Card Shuffle */
+.speed-buttons {
+    text-align: center;
+    padding-top: 30px;
+}
+
+.speed-buttons .button {
+    height: 2.50em;
+}
+
+.main-buttons {
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    padding-top: 30px;
+    margin-bottom: 0 !important;
+}
+
+.count-section {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.fas {
+    padding-left: 5px;
+}
+
+.deck {
+    margin-left: 30px;
+    padding-top: 30px;
+}
+
+.card {
+    width: 75px;
+    height: 100px;
+    float: left;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    border-radius: 2px;
+    background-color: white;
+    border: 0.5px solid lightgray;
+}
+
+.card-suit {
+    width: 100%;
+    display: block;
+}
+
+.card-suit-top {
+    float: left;
+    width: 100%;
+    height: 40%;
+    padding-left: 4px;
+}
+
+.card-suit-bottom {
+    float: left;
+    width: 100%;
+    text-align: left;
+    padding-left: 4px;
+    transform: rotate(180deg);
+}
+
+.card-number {
+    float: left;
+    width: 100%;
+    height: 40%;
+    text-align: center;
+}
+
+.red {
+    color: #FF0000;
+}
+
+.black {
+    color: #000;
+}
+
+.shuffleSlow-move {
+    transition: transform 2s;
+}
+
+.shuffleMedium-move {
+    transition: transform 1s;
+}
+
+.shuffleFast-move {
+    transition: transform 0.5s;
+}
+
+.fade-enter-active, .fade-leave-active {
+    transition: opacity .5s;
+}
+
+.fade-enter, .fade-leave-to {
+    opacity: 0;
+}
+.card-table {
+    background-image: url("../img/felt16.jpg");
+}
+
+@media (max-width: 1210px) {
+    .deck {
+        position: initial;
+        top: 0;
+    }
+}
