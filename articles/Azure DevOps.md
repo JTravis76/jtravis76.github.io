@@ -142,13 +142,25 @@ C:\Users\<USER>\.nuget\packages
 ___
 ## NPM Powershell Tasks
 
+When using a service account to run NPM related tasks, need to update the `.npmrc` file located here: C:\Users\<NAME>\.npmrc
+
+> NOTE: when using an on premise NPM server, you may scope the registry for additional downloads.
+
+*.npmrc*
+```
+@ports:registry=http://devapps2:8080/
+registry=https://registry.npmjs.org/
+strict-ssl=false
+```
+
 Below task will create a NPM shrinkwrap file due to security risk with tar@2.0.0.
 Install packages and finally execute NPM scripts
 
+> NOTE: the `npm ci` command. This will restore packages from the package-lock.json
 ```ps
 New-Item -Path . -Name "npm-shrinkwrap.json" -ItemType "file" -Value '{"lockfileVersion": 1,"dependencies": {"tar": {"version": "2.0.0","from": "tar@^2.0.0","dependencies": {"connect": {"version": "3.0.0","from": "tar@^2.0.0"}}}}}';
 npm install node-sass@4.13.0 rollup@1.27.8
-npm install
+npm ci
 npm run tsc
 npm run build
 ```
