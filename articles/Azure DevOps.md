@@ -492,3 +492,172 @@ agent.diagnostic = true
 > NOTE: when using a variable library in a Release, the values are copied. In an event of an error, will need to create a new Release once the error has been corrected.
 
 When using service account for release tasks, based on company policies. Could prevent internet firewall proxy from working.
+
+# Thycotic Secret Server
+
+This week I was assigned to modified one of our deployment task within Azure DevOps 2019. We are using the WINRM: IIS App Management task. This task will create/update a website, 
+app pools, http binding, and set authentication. So this is the perfect candidate to use our Thycotic Secret Server.
+
+Microsoft kindly open-source their task extensions on github, found [here](https://github.com/microsoft/azure-pipelines-extensions).  
+The extensions we'll be using is under `IISWebAppDeploy -> IISWebAppMgmt`.
+
+First, open the `task.json` and make the following changes.
+```json
+...
+"version": {
+    "Major": 3,
+    "Minor": 1,
+    "Patch": 0
+},
+...
+"inputs": [
+    {
+    ...
+    {
+        "name": "WinRMAuthentication",
+        "type": "radio",
+        "label": "Authentication",
+        "required": true,
+        "defaultValue": "Standard",
+        "options": {
+            "Standard": "Standard",
+            "Thycotic": "Thycotic"
+        },
+        "helpMarkDown": "Select the authentication to use for the WinRM connection with the machine(s). The default is Standard (Username/Password)."
+    },
+    {
+        "name": "AdminUserName",
+        "type": "string",
+        "label": "Admin Login",
+        "defaultValue": "",
+        "visibleRule": "WinRMAuthentication = Standard",
+        "required": true,
+        "helpMarkDown": "Provide the administrator's login of the target machines."
+    },
+    {
+        "name": "AdminPassword",
+        "type": "string",
+        "label": "Password",
+        "defaultValue": "",
+        "visibleRule": "WinRMAuthentication = Standard",
+        "required": true,
+        "helpMarkDown": "Provide the administrator's password of the target machines. <br>The best practice is to create a variable in the Build or Release pipeline, and mark it as 'Secret' to secure it, and then use it here, like '$(adminPassword)'."
+    },
+    {
+        "name": "ThycoticServer",
+        "type": "string",
+        "label": "Server URL",
+        "defaultValue": "",
+        "visibleRule": "WinRMAuthentication = Thycotic",
+        "required": true,
+        "helpMarkDown": "Provide the URL address to Thycotic Secret Server. <br />EX: https://thycotic.ports.local/SecretServer/"
+    },
+    {
+        "name": "ThycoticRule",
+        "type": "string",
+        "label": "Rule Name",
+        "defaultValue": "",
+        "visibleRule": "WinRMAuthentication = Thycotic",
+        "required": true,
+        "helpMarkDown": "Provide the Thycotic Rule name to use."
+    },
+    {
+        "name": "ThycoticKey",
+        "type": "string",
+        "label": "Key",
+        "defaultValue": "",
+        "visibleRule": "WinRMAuthentication = Thycotic",
+        "required": true,
+        "helpMarkDown": "Provide the Thycotic Key to use with rule."
+    },
+    {
+        "name": "ThycoticSecretId",
+        "type": "string",
+        "label": "Secret Id",
+        "defaultValue": "",
+        "visibleRule": "WinRMAuthentication = Thycotic",
+        "required": true,
+        "helpMarkDown": "Provide the Thycotic Id to retrieve from secret server.<br/>EX: 135"
+    },
+...
+```
+
+Now, open the _Main.ps1 and replace section with the following.
+
+```ps
+# find these two lines in original and replace with snippet below
+$adminUserName = Get-VstsInput -Name AdminUserName -Require
+$adminPassword = Get-VstsInput -Name AdminPassword -Require
+```
+
+```ps
+$adminUserName = ""
+$adminPassword = ""
+$thycoticServer = ""
+$thycoticRule = ""
+$thycoticKey = ""
+$thycoticSecretId = ""
+
+$winRmAuthentication = Get-VstsInput -Name WinRMAuthentication
+if ($winRmAuthentication -eq "Standard")
+{
+    $adminUserName = Get-VstsInput -Name AdminUserName -Require
+    $adminPassword = Get-VstsInput -Name AdminPassword -Require
+}
+else
+{
+    $thycoticServer = Get-VstsInput -Name ThycoticServer -Require
+    $thycoticRule = Get-VstsInput -Name ThycoticRule -Require
+    $thycoticKey = Get-VstsInput -Name ThycoticKey -Require
+    $thycoticSecretId = Get-VstsInput -Name ThycoticSecretId -Require
+
+    # First set the Secret Server environment
+    # Then, fetch secret and apply to admin username and password
+    # Note: WINRM seems to like user name is this format; user@domain
+    try {
+        tss remove -c
+        tss init -u $thycoticServer -r $thycoticRule -k $thycoticKey
+        $user = tss secret -s $thycoticSecretId -f username
+        $domain = tss secret -s $thycoticSecretId -f domain
+        $adminUserName = ($user + "@" + $domain)
+        $adminPassword = tss secret -s $thycoticSecretId -f password   
+    }
+    catch [System.Exception] {
+        Write-Host ("##vso[task.LogIssue type=error;]Error within Thycotic Secret Server. Please check your settings.")
+        Write-Host $_
+    }
+}
+```
+
+Finally, open the vss-extension.json and bump up the version so we may update the extension in Azure DevOps.
+> At the time of this writting, current version is 1.5.9
+
+```json
+"version": "1.5.10",
+```
+
+To build the VISX, run the command from the parent directory: `iiswebdeploy\src`.
+
+> Note: this is a CLI tool use with node js
+
+```
+tfx extension create --manifest-globs vss-extension.json
+```
+
+Completed, publish the package to your server. *Note: had to use node v10.x to run the gulp commands
+
+# Thycotic SDK
+
+Once our extension is ready, we now need to setup the Thycotic SDK. I simply copied the SDK to the same server as the agent is running. Then add a Batch file named `tss.bat` to allow the agent to run Thycotic.
+
+> Note: be sure to update the path to match your directory.
+
+```bat
+@echo Off
+"E:\_Software\secretserver-sdk-1.4.1-win-x64\tss.exe" %*
+```
+
+Then save the batch file to the agent's user directory. `C:\Users\DevOpsBuildSvc\.dotnet\tools\tss.bat`
+
+
+> TIP: I used the Dotnet tools directory so I don't need to reboot the server to apply new enviroment paths.
