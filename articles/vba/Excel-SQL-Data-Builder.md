@@ -1,7 +1,7 @@
 #meta-start
 Title:Importing/Exporting SQL data from Prod to Local DB
 Created:7-23-2020
-Category:other
+Category:vba
 #meta-end
 # Importing/Exporting SQL data from Prod to Local DB
 Once I was working a web application with a MS SQL datastore, this application was a safety-related software that often gets complains from the customers. Never fails, you fix one things and break three others. Our DBAs did a wonderful job in refreshing production data within our development database, but sometimes, I find it easier just to import the data into MS LocalDB to ease troubleshooting,

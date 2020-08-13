@@ -1,7 +1,7 @@
 #meta-start
 Title:Raw SQL Statement in NET Core and EntityFrameworkCore
 Created:7-23-2020
-Category:other
+Category:dotnetcore
 #meta-end
 # Raw SQL Statement in NET Core and EntityFrameworkCore
 When working with ASP.NET Core 2.1 and EntityFrameworkCore 2.1.14, you may want to run raw SQL

@@ -1,3 +1,12 @@
+#meta-start
+Title:Visual Studio Code - Common Tasks
+Created:8-11-2020
+Category:vscode
+#meta-end
+# Visual Studio Code - Common Tasks
+Here are some common everyday tasks I used in VS Code.
+
+```json
 {
     // See https://go.microsoft.com/fwlink/?LinkId=733558
     // for the documentation about the tasks.json format
@@ -82,3 +91,4 @@
         }
     ]
 }
+```

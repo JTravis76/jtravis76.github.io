@@ -28,3 +28,23 @@ Search for `staticContent` and add the following to allow JSON files to be proce
     <mimeMap fileExtension=".json" mimeType="text/x-javascript" />
 </staticContent>    
 ```
+
+> Might see an error this in the browser console.
+
+```
+HTTP404: NOT FOUND - The server has not found anything matching the requested URI (Uniform Resource Identifier).
+GET - http://WebApp/fonts/bootstrap/glyphicons-halflings-regular.woff2
+```
+
+*web.config*
+```xml
+<system.webServer>
+    <staticContent>
+        <clientCache cacheControlCustom="public" cacheControlMode="UseMaxAge" cacheControlMaxAge="365.00:00:00" />
+        <remove fileExtension=".woff" />
+        <remove fileExtension=".woff2" />
+        <mimeMap fileExtension=".woff" mimeType="application/x-font-woff" />
+        <mimeMap fileExtension=".woff2" mimeType="application/font-woff2" />
+    </staticContent>
+</system.webServer>
+```

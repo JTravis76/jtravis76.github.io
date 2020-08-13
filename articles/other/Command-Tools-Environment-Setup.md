@@ -44,7 +44,7 @@ exit /b 0
 
 ```bat
 @Echo Off
-REM > tss init -u "https://{url}/SecretServer/" -r "" -k ""
+REM > tss init -u "https://{url}/SecretServer/" -r "SomeRuleName" -k "SomeKeyValue"
 
 "E:\_Software\secretserver-sdk-1.4.1-win-x64\tss.exe" "-kd" "E:\Thycotic" "-cd" "E:\Thycotic\SDK" %*
 ```

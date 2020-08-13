@@ -16,7 +16,7 @@
             BaseURL: isDev ? "./" : "https://jtravis76.github.io/",
             Version: "0.0.0.0",
             VersionDate: "2020-01-01T00:00:00Z",
-            Enviroment: "== LOCAL == LOCAL == LOCAL =="
+            Environment: "== LOCAL == LOCAL == LOCAL =="
         },
         getters: {
             baseURL: function (state) { return state.BaseURL; }
@@ -45,7 +45,7 @@
     };
     var CategoryArticles = {
         name: "category-articles",
-        template: "<div class=\"container\"> <h1 class=\"title is-1\">{{category.Name}}</h1> <section class=\"section\"> <ul> <li v-for=\"art in articles\"> <span class=\"fa fa-file\" style=\"font-size:30px;\"></span> <router-link :to=\"{path:'/categories/' + category.Link + '/' + art.Link}\" class=\"blog-title\">{{art.Title}}</router-link> <br /><small><span class=\"fa fa-calendar\"></span> {{art.Created | toDateString }}</small> </li> </ul> </section> </div>",
+        template: "<div class=\"container\"> <h1 class=\"title is-1\">{{category.Name}}</h1> <section class=\"section\"> <ul> <li v-for=\"art in articles\"> <span class=\"fa fa-file\" style=\"font-size:30px;\"></span> <router-link :to=\"{path:'/categories/' + category.Link + '/' + art.Link}\" class=\"blog-title\">{{art.Title}}</router-link> <br /><small><span class=\"fa fa-calendar-1\"></span> {{art.Created | toDateString }}</small> </li> </ul> </section> </div>",
         computed: {
             category: function() {
                 if (this.$store.state.Categories.length > 0) {

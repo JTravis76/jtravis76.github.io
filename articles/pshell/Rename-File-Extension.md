@@ -8,7 +8,7 @@ Category:pshell
 Often times I share code via email and some mail providers; like Google, will remove/reject attachments ending in .js (javascript). Even when they are zipped. So the best way to transport safely, is too renamed to the file exenstions to .ts (typescript).
 
 ```ps
-$dir = Get-ChildItem "C:\Users\public\source\repos\my-project\src" -Recurse
+$dir = Get-ChildItem -Path "C:\Users\public\source\repos\my-project\src" -Recurse
 $list = $dir | where {$_.Extension -eq ".js"}
 
 
