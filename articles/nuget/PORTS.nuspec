@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata>
+    <id>Netcenter.API.RoleProvider</id>
+    <version>1.0.0.0</version>
+    <title>Netcenter API Role Provider</title>
+    <authors>Jeremy Travis</authors>
+    <owners>Jeremy Travis</owners>
+
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Role Provider to be use with Netcenter API</description>
+    <copyright>Copyright © FBP-BWXT 2018-present</copyright>
+    <dependencies></dependencies>
+  </metadata>
+	<files>
+		<file src="\\svr-userfs01\ddpuser$\KDJ\_JeremyTravis\Nuget\lib\net461\Netcenter.dll" target="lib\net461\Netcenter.dll" />
+	</files>
+</package>

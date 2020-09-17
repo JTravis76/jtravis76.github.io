@@ -7,13 +7,13 @@ Category:azure
 
 ## Agents: Build | Release
 
-Agents can be use for both Build or Release defintions.
+Agents can be use for both Build or Release definitions.
 
 * Build Definition
   * setup tasks required for build
   * setup triggers for auto building upon commits
 * Release Definition
-  * Setup rules for Artifacts and Enviroments
+  * Setup rules for Artifacts and Environments
   * Auto | Manual deployment with tags
 
 [Predefined Agent Variables](https://docs.microsoft.com/en-us/azure/devops/pipelines/build/variables?view=azure-devops&tabs=yaml)\
@@ -21,7 +21,7 @@ Agents can be use for both Build or Release defintions.
 ___
 ## Installing Agents
 
-Below sample script will install an agent named `PA13078-A1` in Agent Pool `PA13078` ans run as a service.
+Below sample script will install an agent named `PA13078-A1` in Agent Pool `PA13078` and run as a service.
 ```ps
 .\config.cmd --pool "PA13078" --agent "PA13078-A1" --runasservice --work '_work' --url 'http://ddptfs01:8080/tfs/' --auth Integrated
 ```
@@ -39,8 +39,8 @@ _(Deployment Pools => Deployment Group => Project)_
 
 The `_work` directory consist many folders to divide the work.
 
-* `_tasks` - downloaded tasks to be perform by agent based on pipline
-* `_tool` - a cache copy of Nuget and/or Node
+* `_tasks` - downloaded tasks to be perform by agent based on pipeline
+* `_tool` - a cache copy of NuGet and/or Node
 * `1` - first **build** project executed by agent
   * `a` - publish artifacts folder
   * `s` - project source from TFS
@@ -50,7 +50,7 @@ The `_work` directory consist many folders to divide the work.
 ### `_TOOL` Directory
 The `_tool` directory consist of tools to assist in many building tasks, such as; nuget package restore, node/npm commands, etc;
 
-Depending on your corporate firewall policy, may need to add tools to the agent directory manually. Below are example for Nuget and NodeJs.
+Depending on your corporate firewall policy, may need to add tools to the agent directory manually. Below are example for NuGet and NodeJs.
 
 >**NOTE:** x64.complete is a empty file with the extension `.complete`
 
@@ -73,7 +73,7 @@ Depending on your corporate firewall policy, may need to add tools to the agent 
 +------ x64.complete
 ```
 
-To set a Enviroment path temporary, use the following Powershell.
+To set a Environment path temporary, use the following PowerShell.
 
 ```powershell
 Clear-Host
@@ -84,9 +84,9 @@ $env:Path += ";$(Agent.ToolsDirectory)\Sass\1.15.3\x64";
 [System.Environment]::SetEnvironmentVariable("Path", "$(Agent.ToolsDirectory)\_tool\Sass\1.15.3\x64", [System.EnvironmentVariableTarget]::Process);
 ```
 ___
-## Nuget
+## NuGet
 
-If a build requires restoring Nuget packages, must include `Nuget.config` in your project with the following package feeds.
+If a build requires restoring NuGet packages, must include `Nuget.config` in your project with the following package feeds.
 
 >**Note:** `Nuget.config` is better place at root of repo to be shared across all branches. 
 _This would resulting in downloading the root repo and cloaking other branches._ May also result in cloaking newly added branches 
@@ -107,10 +107,10 @@ _This would resulting in downloading the root repo and cloaking other branches._
 </configuration>
 ```
 
-### Nuget Restore vs. Dotnet Restore
-Both restore works a bit differently. Nuget restore can restore packages for both Framework and Core projects, but Framework requires there is a `packages` directory within the solution for successful builds.
+### NuGet Restore vs. Dotnet Restore
+Both restore works a bit differently. NuGet restore can restore packages for both Framework and Core projects, but Framework requires there is a `packages` directory within the solution for successful builds.
 
-Dotnet restore is a wrapper around nuget.exe, but Core application reference packages from the `.nuget` folder of the user's profile. Therefore, does nnot need to be copied to solution prior to building. This action mainly updates the cache directory.
+Dotnet restore is a wrapper around nuget.exe, but Core application reference packages from the `.nuget` folder of the user's profile. Therefore, does not need to be copied to solution prior to building. This action mainly updates the cache directory.
 
 Azure DevOps (on-premise) server needs access to download Nuget.exe and Packages.
 * https://dist.nuget.org/win-x86-commandline/v5.3.0/nuget.exe
@@ -131,7 +131,7 @@ Nuget.exe cache directory for agents.
 
 > If desire a certain Nuget.exe version used by Visual Studio. Click Help-> About Microsoft Visual Studio  scroll to `Nuget Package Manager`
 
-**Nuget Package Cache**
+**NuGet Package Cache**
 
 Pre-downloaded packages can be placed in the following user's directory running the agent service.
 
@@ -140,7 +140,7 @@ C:\Users\<USER>\.nuget\packages
 ```
 
 ___
-## NPM Powershell Tasks
+## NPM PowerShell Tasks
 
 When using a service account to run NPM related tasks, need to update the `.npmrc` file located here: C:\Users\<NAME>\.npmrc
 
@@ -271,7 +271,7 @@ if (Test-Path -Path "$(Build.SourcesDirectory)\App_Data\publish" -PathType Conta
 }
 ```
 
-Setup a temporary enviroment path to a tool.
+Setup a temporary environment path to a tool.
 
 ```ps
 Clear-Host
@@ -282,7 +282,7 @@ $env:Path += ";$(Agent.ToolsDirectory)\Sass\1.15.3\x64";
 sass "\wwwroot\scss\index.scss" "\wwwroot\css\site.css" --no-source-map
 ```
 
-Setup vue to use minified version for QA/Prod depolyments:
+Setup vue to use minified version for QA/Prod deployments:
 
 > NOTE: this currently for requiredjs config
 
@@ -361,7 +361,7 @@ To meet the requirements for proper versioning, add the additional Revision.
 
 When using MSBUILD to publish, must first run `dotnet restore` before running `msbuild /m `
 
->Note: when working with mutiple SDK of Net Core, place a `global.json` file at root of branch.
+>Note: when working with multiple SDK of Net Core, place a `global.json` file at root of branch.
 
 ```json
 {
@@ -383,7 +383,7 @@ Could be related to a fallback path not reachable.
 </ItemGroup>
 ```
 
-[Solution] Replacing with a Nuget package.
+[Solution] Replacing with a NuGet package.
 ```xml
 <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="2.1.1" />
@@ -485,7 +485,7 @@ WinRM HTTPS port: 5986
 agent.diagnostic = true
 
 
-# Release - Continous Delivery CD
+# Release - Continuous Delivery CD
 
 ## Variable Library
 
@@ -498,7 +498,7 @@ When using service account for release tasks, based on company policies. Could p
 This week I was assigned to modified one of our deployment task within Azure DevOps 2019. We are using the WINRM: IIS App Management task. This task will create/update a website, 
 app pools, http binding, and set authentication. So this is the perfect candidate to use our Thycotic Secret Server.
 
-Microsoft kindly open-source their task extensions on github, found [here](https://github.com/microsoft/azure-pipelines-extensions).  
+Microsoft kindly open-source their task extensions on GitHub, found [here](https://github.com/microsoft/azure-pipelines-extensions).  
 The extensions we'll be using is under `IISWebAppDeploy -> IISWebAppMgmt`.
 
 First, open the `task.json` and make the following changes.
@@ -615,9 +615,17 @@ else
     # Then, fetch secret and apply to admin username and password
     # Note: WINRM seems to like user name is this format; user@domain
     try {
-        tss remove -c
-        tss init -u $thycoticServer -r $thycoticRule -k $thycoticKey
+        $v = tss remove -c
+        Write-Verbose $v[0]
+        $v = tss init -u $thycoticServer -r $thycoticRule -k $thycoticKey
+        Write-Verbose $v[0]
         $user = tss secret -s $thycoticSecretId -f username
+
+        if ($user[0] -eq "400 - Bad Request")
+        {
+            throw "Access Denied to secret id: $thycoticSecretId"
+        }
+
         $domain = tss secret -s $thycoticSecretId -f domain
         $adminUserName = ($user + "@" + $domain)
         $adminPassword = tss secret -s $thycoticSecretId -f password   
@@ -630,7 +638,7 @@ else
 ```
 
 Finally, open the vss-extension.json and bump up the version so we may update the extension in Azure DevOps.
-> At the time of this writting, current version is 1.5.9
+> At the time of this writing, current version is 1.5.9
 
 ```json
 "version": "1.5.10",
@@ -648,16 +656,16 @@ Completed, publish the package to your server. *Note: had to use node v10.x to r
 
 # Thycotic SDK
 
-Once our extension is ready, we now need to setup the Thycotic SDK. I simply copied the SDK to the same server as the agent is running. Then add a Batch file named `tss.bat` to allow the agent to run Thycotic.
+Once our extension is ready, we now need to setup the Thycotic SDK. I simply copied the SDK to the same server as the agent is running. Then add a Batch file named `tss.cmd` to allow the agent to run Thycotic.
 
 > Note: be sure to update the path to match your directory.
 
 ```bat
 @echo Off
-"E:\_Software\secretserver-sdk-1.4.1-win-x64\tss.exe" %*
+"C:\secretserver-sdk-1.4.1-win-x64\tss.exe" %*
 ```
 
-Then save the batch file to the agent's user directory. `C:\Users\DevOpsBuildSvc\.dotnet\tools\tss.bat`
+Then save the batch file to the agent's user directory. `C:\Users\DevOpsBuildSvc\.dotnet\tools\tss.bat` or to the `C:\WINDOWS` directory.
 
 
-> TIP: I used the Dotnet tools directory so I don't need to reboot the server to apply new enviroment paths.
+> TIP: I used the Dotnet tools directory so I don't need to reboot the server to apply new environment paths.
