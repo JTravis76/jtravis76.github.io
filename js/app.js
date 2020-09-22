@@ -70,19 +70,52 @@
     var Article = {
         name: "article-page",
         template: "<div class=\"container\"> <div class=\"columns\"> <div class=\"column is-12\"> <article class=\"markdown-body\" v-html=\"markdown\"></article> </div> </div> </div>",
-        computed: {
-            markdown: function() {
-                let vm = this;
-                let article = this.$store.state.Articles.firstOrDefault(function(x) {
-                    return x.Link === vm.$route.params.art;
-                });
-                if (article !== null) {
-                    return markdownit().render(article.Markdown);
-                }
-                return "<div>ERROR: Article link is broken</div>"
+        data: function() {
+            return {
+                markdown: ""
             }
         },
+        // computed: {
+        //     markdown: function() {
+        //         let vm = this;
+        //         let article = this.$store.state.Articles.firstOrDefault(function(x) {
+        //             return x.Link === vm.$route.params.art;
+        //         });
+        //         if (article !== null) {
+        //             return markdownit().render(article.Markdown);
+        //         }
+        //     }
+        // },
         created: function(){
+            let vm = this;
+            this.$http.get(`https://raw.githubusercontent.com/JTravis76/jtravis76.github.io/master/articles/${vm.$route.params.cat}/${vm.$route.params.art}.md`)
+                .then(resp => {
+                    let article = resp.data;
+                    if (article !== null && article.length > 0) {
+                        let startIdx = article.indexOf("#meta-end") + 9;
+                        vm.markdown = markdownit().render(article.substr(startIdx, article.length));
+                    }
+            }).catch(err => {
+                console.log(err);
+                vm.markdown = "<div class=\"error\">ERROR: Article link is broken</div>"
+            });
+            // fetch(`https://raw.githubusercontent.com/JTravis76/jtravis76.github.io/master/articles/${vm.$route.params.cat}/${vm.$route.params.art}.md`, 
+            // {
+            //     cache: "no-cache",
+            //     method: "GET"
+            // }).then(async resp => {
+            //     let article = await resp.text();
+
+            //     if (article !== null && article.length > 0) {
+            //         let startIdx = article.indexOf("#meta-end") + 9;
+            //         vm.markdown = markdownit().render(article.substr(startIdx, article.length));
+            //     }
+            // })
+            // .catch(err => {
+            //     console.log(err);
+            //     //vm.markdown = "<div class=\"error\">ERROR: Article link is broken</div>"
+            // });
+
             this.$nextTick(() => {
                 HighlightCode();
             });

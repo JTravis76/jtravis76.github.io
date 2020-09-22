@@ -31,7 +31,8 @@ Param ([string]$DirPath, [string]$OutPath)
                 $txt = $txt.Substring($v + 11)
             }
 
-            $obj.Add("Markdown", $txt)
+            <# Move to download article vs storing in database - 2020-09-22 #>
+            # $obj.Add("Markdown", $txt)
 
             $meta = 0
             foreach($line in [System.IO.File]::ReadLines($file.FullName))
@@ -49,7 +50,8 @@ Param ([string]$DirPath, [string]$OutPath)
                     if ($s[0] -eq "Title")
                     {
                         # add alias link
-                        $obj.Add("Link", $s[1].Replace(" ", "-").ToLower())
+                        #$obj.Add("Link", $s[1].Replace(" ", "-").ToLower())
+                        $obj.Add("Link", $file.Name.Replace(".md", ""))
                     }
                 }
                 if ($line -eq "#meta-start")

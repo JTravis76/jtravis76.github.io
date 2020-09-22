@@ -134,6 +134,14 @@ ul li small {
 section {
     min-height: 700px; }
 
+div.error {
+    color: red;
+    border: 1px solid red;
+    padding: 4px 8px;
+    border-radius: 4px;
+    background-color: mistyrose;
+    font-size: larger; }
+
 [v-cloak] {
     display: none; }
 
