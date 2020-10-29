@@ -1,3 +1,7 @@
+/* workaround for MS Edge 18.17763 */
+.navbar-item.is-hoverable:hover .navbar-dropdown {
+	display: block;
+}
 /* Breadcrumbs */
 .breadcrumb {
     padding: 8px 15px;

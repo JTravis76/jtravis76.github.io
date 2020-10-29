@@ -1,3 +1,8 @@
+#meta-start
+Title:Empty WebSite Template
+Created:10-29-2020
+Category:visualstudio
+#meta-end
 # Empty WebSite Template - Visual Studio
 
 In Visual Studio 2019, the Empty Website template seem to be missing. Below is how to setup manually

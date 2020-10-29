@@ -8,7 +8,7 @@ Category:visualstudio
 
 Often times when exploring other project templates in Visual Studio 2017, the recent template list gets a bit overwhelming. Here are some instructions how to clear the list to start over.
 
-![vs-fig1](./img/vs-fig1.png)
+![vs-fig1](./articles/visualstudio/img/vs-fig1.png)
 
 * First and most important, close all instances of Visual Studios
 * Locate the `privateregistry.bin` file in the following directory; %USERPROFILE%\AppData\Local\Microsoft\VisualStudio\15.0_21b5ff65
@@ -38,4 +38,4 @@ Windows Registry Editor Version 5.00
 "MRUTemplates"="1[]"
 ```
 
-![vs-fig2](./img/vs-fig2.png)
+![vs-fig2](./articles/visualstudio/img/vs-fig2.png)

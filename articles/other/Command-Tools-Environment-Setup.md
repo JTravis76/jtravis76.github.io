@@ -3,7 +3,7 @@ Title:Command Tools Environment Setup
 Created:7-23-2020
 Category:other
 #meta-end
-#Command Tools Environment Setup
+# Command Tools Environment Setup
 CLI tools are becoming more and more popular. Below are some tips to create a batch files to load up your tool belt.
 
 Personally, I use the .dotnet\tools directory to store all the batch files. Since the Environment path was already set there.

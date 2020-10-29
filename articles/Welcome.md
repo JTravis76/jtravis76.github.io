@@ -3,7 +3,6 @@ Title:Welcome Page
 Created:3-18-2020
 Category:home
 #meta-end
-
 # Welcome
 
 > This is a blockquote
@@ -14,18 +13,18 @@ function TEST() {
     console.log("Hello World");
 }
 ```
-# Technolog Stack 'n Terms
+# Technology Stack 'n Terms
 
 SOLID
-	Single Responsibilty
-	Open for extension, Closed for modifitation
-	Liskov Subsitution
+	Single Responsibility
+	Open for extension, Closed for modification
+	Liskov Substitution
 	Interface Segregation
 	Dependency Inversion
 
 DRY (Don't Repeat Yourself)
 
-N-Tier / Mult-Tier
+N-Tier / Multi-Tier
 
 Onion Architecture
 
@@ -72,7 +71,7 @@ ES6
 ## JS Libraries
 JQuery
 Knockout
-Backone
+Backbone
 
 ## Data Format
 XML
@@ -88,7 +87,7 @@ ES
 IIFE (Immediately Invoked Function Expression)
   which will prevent us from polluting the global namespace
 
-  Tips: Invoke function by adding another pair of parens to the end of it
+  Tips: Invoke function by adding another pair of parentheses to the end of it
 (function () {
   console.log('Pronounced IF-EE')
 })()
@@ -111,7 +110,7 @@ Browserify
 
 ## Bundlers
 WebPack (CSS+JS)
-TypeScript (AMD only)
+TypeScript (AMD & SystemJS only)
 RollupJS
 ParcelJS (CSS+JS)
 Browserify

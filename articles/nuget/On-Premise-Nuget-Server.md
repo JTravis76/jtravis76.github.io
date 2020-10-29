@@ -1,4 +1,8 @@
-
+#meta-start
+Title:On-Premise Nuget Server
+Created:3-18-2020
+Category:nuget
+#meta-end
 # On-Premise Nuget Server
 
 NuGet Instructions
@@ -12,13 +16,13 @@ Click the green plus button
 Name: Ports.Nuget
 Source: http://devapps2/Ports.Nuget/nuget
 
-![fig-1](./img/fig-1.png)
+![fig-1](./articles/nuget/img/fig-1.png)
  
 NOTE:  For testing Nuget packages, it’s recommend that you create a local repository. Simply repeat the steps above and for the Name/Source. Point to your local directory.
-![fig-2](./img/fig-2.png) 
+![fig-2](./articles/nuget/img/fig-2.png) 
 
 Viewing NuGet packages by change the package source options.
-![fig-3](./img/fig-3.png)
+![fig-3](./articles/nuget/img/fig-3.png)
  
 
 STEP 2: Download Nuget.exe
@@ -33,7 +37,7 @@ Browse to where you saved your nuget.exe
 Run following command to create a basic “Package.nuspec”
 C:\>Nuget spec
 
-![fig-4](./img/fig-4.png)
+![fig-4](./articles/nuget/img/fig-4.png)
  
 NOTE: You could build this file directly from the project folder where your .csproj is located, but it seem to grab more/less files than expected. Could do this, if ONLY packaging a single assembly (DLL) file.
 
@@ -68,7 +72,7 @@ Browse to where you saved your nuget.exe
 Run following command to pack files.
 C:\>nuget.exe pack C:\Users\KDJ\Desktop\Package.nuspec  
 
-![fig-5](./img/fig-5.png)
+![fig-5](./articles/nuget/img/fig-5.png)
 
 You will notice a warning about a framework folder. Since this project doesn’t have any MS Framework dependencies, you can safety ignore this message.
 
@@ -80,7 +84,7 @@ You will notice a warning about a framework folder. Since this project doesn’t
 
 STEP 6: Viewing a Nuget Package
 Nuget packages can be opened with 7-zip manager. Can also add/remove files by drag n’ drop to further customize the package.
-![fig-6](./img/fig-6.png) 
+![fig-6](./articles/nuget/img/fig-6.png) 
 
 
 STEP 7: Testing a Nuget Package from local repository

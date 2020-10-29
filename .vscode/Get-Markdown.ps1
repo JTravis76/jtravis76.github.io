@@ -60,6 +60,7 @@ Param ([string]$DirPath, [string]$OutPath)
                 }
             }
 
+            # Add any orphan files to "other"
             if (!$obj.Contains("Category")) 
             {
                 $obj.Add("Category", "other")

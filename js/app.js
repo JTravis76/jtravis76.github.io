@@ -36,10 +36,13 @@
     };
     var Categories = {
         name: "categories-page",
-        template: "<div> <div class=\"columns is-multiline\"> <template v-for=\"cat in categories\"> <div class=\"column\"> <router-link :to=\"{ path: '/categories/' + cat.Link }\"> <div class=\"category\">{{cat.Name}}</div> </router-link> </div> </template> </div> <router-view></router-view> </div>",
+        template: "<div> <div style=\"text-align:center; margin-bottom:20px; font-size:x-large;\"><span class=\"tag is-dark\">{{categories.length}}</span> categories with <span class=\"tag is-dark\">{{articleCnt}}</span> articles. Wow, that's a lot of great knowledges!</div> <div class=\"columns is-multiline\"> <template v-for=\"cat in categories\"> <div class=\"column\"> <router-link :to=\"{ path: '/categories/' + cat.Link }\"> <div class=\"category\">{{cat.Name}}</div> </router-link> </div> </template> </div> <router-view></router-view> </div>",
         computed: {
             categories: function() {
                 return this.$store.state.Categories;
+            },
+            articleCnt: function() {
+                return this.$store.state.Articles.length;
             }
         }
     };
@@ -88,7 +91,8 @@
         // },
         created: function(){
             let vm = this;
-            this.$http.get(`https://raw.githubusercontent.com/JTravis76/jtravis76.github.io/master/articles/${vm.$route.params.cat}/${vm.$route.params.art}.md`)
+            let base = isDev ? "." : "https://raw.githubusercontent.com/JTravis76/jtravis76.github.io/master";
+            this.$http.get(`${base}/articles/${vm.$route.params.cat}/${vm.$route.params.art}.md`)
                 .then(resp => {
                     let article = resp.data;
                     if (article !== null && article.length > 0) {
@@ -99,7 +103,7 @@
                 console.log(err);
                 vm.markdown = "<div class=\"error\">ERROR: Article link is broken</div>"
             });
-            // fetch(`https://raw.githubusercontent.com/JTravis76/jtravis76.github.io/master/articles/${vm.$route.params.cat}/${vm.$route.params.art}.md`, 
+            // fetch(`${base}/articles/${vm.$route.params.cat}/${vm.$route.params.art}.md`, 
             // {
             //     cache: "no-cache",
             //     method: "GET"
