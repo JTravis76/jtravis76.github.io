@@ -311,6 +311,9 @@
 
     Vue.filter("toDateString", function (value) {
         if (value) {
+            if (value.indexOf("/Date(") > -1) {
+                value = parseInt(value.replace("/Date(", "").replace(")/", ""));
+            }
             return new Date(value).toDateString();
         }
     });

@@ -1,11 +1,6 @@
-#meta-start
-Title:Get-NPM - Powershell
-Created:6-1-2020
-Category:pshell
-#meta-end
-#Get-NPM - PowerShell
+# Get-NPM - PowerShell
 
-While looking into build an on-permise NPM server, was looking for ways to download a cache version of other npm packages. This is my attempt in PowerShell to replicate what Node NPM was doing.
+While looking into build an on-premise NPM server, was looking for ways to download a cache version of other npm packages. This is my attempt in PowerShell to replicate what Node NPM was doing.
 
 ```ps
 #

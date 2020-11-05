@@ -1,10 +1,10 @@
 <#
-# Get-Markdown 
+# Get-Articles 
 # Build Vue-Blogger JSON database
 # Scans Markdown directory and reads information into a single database object
 # Author: Jeremy Travis - 3/2020
 #>
-Function Get-Markdown
+Function Get-Articles
 {
 [cmdletbinding()]
 Param ([string]$DirPath, [string]$OutPath)
@@ -23,50 +23,25 @@ Param ([string]$DirPath, [string]$OutPath)
             #= Create an empty object
             $obj = @{}    
 
-            $txt = [System.IO.File]::ReadAllText($file.FullName)
-            #Remove the leading meta-data
-            $v = $txt.LastIndexOf("#meta-end")
-            if ($v -ne -1)
-            {
-                $txt = $txt.Substring($v + 11)
-            }
+            $data = $file.FullName.split('\')
+            $category = $data[$data.length - 2]
+            $link = $data[$data.length - 1].Replace(".md", "").ToLower()
+            $created = $file.CreationTime
+            $title = ""
 
-            <# Move to download article vs storing in database - 2020-09-22 #>
-            # $obj.Add("Markdown", $txt)
-
-            $meta = 0
             foreach($line in [System.IO.File]::ReadLines($file.FullName))
             {
-                if ($line -eq "#meta-end")
+                if ($line.StartsWith("# "))
                 {
-                    $meta = 0
-                    break;
-                }
-                if ($meta -eq 1)
-                {
-                    $s = $line -split ":"
-                    $obj.Add($s[0], $s[1])
+                    $title = $line.Replace("# ", "")
 
-                    if ($s[0] -eq "Title")
-                    {
-                        # add alias link
-                        #$obj.Add("Link", $s[1].Replace(" ", "-").ToLower())
-                        $obj.Add("Link", $file.Name.Replace(".md", ""))
-                    }
-                }
-                if ($line -eq "#meta-start")
-                {
-                    $meta = 1
-                }
-            }
+                    $obj.Add("Category", $category)
+                    $obj.Add("Title", $title)
+                    $obj.Add("Link", $link)
+                    $obj.Add("Created", $created)
 
-            # Add any orphan files to "other"
-            if (!$obj.Contains("Category")) 
-            {
-                $obj.Add("Category", "other")
-                $obj.Add("Title", $file.Name)
-                #$obj.Add("Link", $file.Name.Replace(" ", "-").ToLower())
-                $obj.Add("Created", "")
+                    break
+                }
             }
 
             # Add object to array
@@ -78,7 +53,6 @@ Param ([string]$DirPath, [string]$OutPath)
         $articles.Add("Articles", $db)
 
         $json = $articles | ConvertTo-Json -Compress
-        #Write-Host $json
 
         <#== Copy results into the master db.json ==#>
         New-Item -Path $OutPath -Name "articles.json" -ItemType "file" -Value $json -Force    
@@ -86,5 +60,5 @@ Param ([string]$DirPath, [string]$OutPath)
 }
 
 $in = "articles"
-$out = "db"
-Get-Markdown -DirPath $in -OutPath $out
+$out = "./db"
+Get-Articles -DirPath $in -OutPath $out

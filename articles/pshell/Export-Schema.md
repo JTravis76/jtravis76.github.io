@@ -1,9 +1,4 @@
-#meta-start
-Title:Export SQL Schema - Powershell
-Created:6-1-2020
-Category:pshell
-#meta-end
-#Export SQL Schema - Powershell
+# Export SQL Schema - Powershell
 
 Here is a nice script I found that export the SQL schema.
 

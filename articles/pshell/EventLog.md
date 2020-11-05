@@ -1,9 +1,4 @@
-#meta-start
-Title:Event Log - Powershell
-Created:6-1-2020
-Category:pshell
-#meta-end
-#Event Log - Powershell
+# Event Log - Powershell
 
 While setting up logging for .NET Core, I was experimenting writing to a Window's Event Log. Below is a PowerShell example.
 

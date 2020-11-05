@@ -1,9 +1,4 @@
-#meta-start
-Title:Get-FileHash - Powershell
-Created:6-1-2020
-Category:pshell
-#meta-end
-#Get-FileHash - Powershell
+# Get-FileHash - Powershell
 
 While testing with NPM tarballs, wanted a way to test the file hash. This is how you would do that in PowerShell.
 

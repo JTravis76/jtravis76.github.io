@@ -1,9 +1,4 @@
-#meta-start
-Title:Read-NpmPackageLock - Powershell
-Created:6-1-2020
-Category:pshell
-#meta-end
-#Read-NpmPackageLock - Powershell
+# Read-NpmPackageLock - Powershell
 
 This script was use to restore NPM packages by parsing the NPM package-lock.json file. The download tarballs were saved to an on-permise NPM server.
 
