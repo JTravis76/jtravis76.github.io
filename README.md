@@ -11,7 +11,7 @@ The following metadata in collected.
 **Title**: first `# ` markdown found in the article  
 **Created**: file created date  
 **Category**: parent folder name of file  
-**Link**: name of file
+**Link**: name of file (NOTE: replace whitespace with a dash '-')
 
 As of Sept. 2020, I edit the PS script to move away from storing the markdown content in the JSON database. Now, all article content is loaded via HTTP request. This change become available once my company whitelist `https://raw.githubusercontent.com`.
 

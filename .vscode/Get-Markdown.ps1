@@ -25,7 +25,7 @@ Param ([string]$DirPath, [string]$OutPath)
 
             $data = $file.FullName.split('\')
             $category = $data[$data.length - 2]
-            $link = $data[$data.length - 1].Replace(".md", "").ToLower()
+            $link = $data[$data.length - 1].Replace(".md", "") #.ToLower() the link is case senstive
             $created = $file.CreationTime
             $title = ""
 
