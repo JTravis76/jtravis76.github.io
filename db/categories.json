@@ -14,6 +14,7 @@
         { "Name": "Powershell", "Link": "pshell" },
         { "Name": "Windows Registry", "Link": "registry" },
         { "Name": "Structure Query Language", "Link": "sql" },
+        { "Name": "TypeScript", "Link": "ts" },
         { "Name": "Visual Basic Addin", "Link": "vba" },
         { "Name": "Visual Studio", "Link": "visualstudio" },
         { "Name": "Visual Studio Code", "Link": "vscode" }
