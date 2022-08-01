@@ -186,6 +186,65 @@
             }
         }
     }
+    var BinaryClock = {
+        name: "binary-clock",
+        template: `<div class="clock-wrapper">
+        <div class="binary-clock">
+            <div>
+                <img alt="0" src="./img/clock/off.png" />
+                <img alt="0" src="./img/clock/off.png" />
+            </div>
+            <div>
+                <img alt="0" src="./img/clock/off.png" />
+                <img alt="0" src="./img/clock/off.png" />
+            </div>
+            <div>
+                <img alt="0" src="./img/clock/off.png" />
+                <img alt="0" src="./img/clock/off.png" />
+            </div>
+        </div>
+        <br />
+        <template v-for="part in timeParts">
+          <img :alt="part" :src="'./img/clock/' + part + '.gif'" />
+        </template>
+        </div>`,
+        data() {
+            return {
+                timeParts: ["8","8","dgc","8","8","dgc","8","8","am"],
+                timerIdx: 0
+            };
+        },
+        created() {
+            this.timerIdx = window.setInterval(() => {
+                const d = new Date();
+                let hr = d.getHours() + 100;
+                const mn = d.getMinutes() + 100;
+                const se = d.getSeconds() + 100;
+                let am_pm = "am";
+                if(hr === 100) {
+                    hr = 112;
+                    am_pm = "am";
+                }
+                else if(hr < 112) am_pm = "am";
+                else if(hr === 112) am_pm = "pm";
+                else if(hr > 112) {
+                    am_pm = "pm";
+                    hr = (hr - 12);
+                }
+                const timeStr = '' + hr.toString() + mn.toString() + se.toString();
+                this.$set(this.timeParts, 0, timeStr.substring(1,2));
+                this.$set(this.timeParts, 1, timeStr.substring(2,3));
+                this.$set(this.timeParts, 3, timeStr.substring(4,5));
+                this.$set(this.timeParts, 4, timeStr.substring(5,6));
+                this.$set(this.timeParts, 6, timeStr.substring(7,8));
+                this.$set(this.timeParts, 7, timeStr.substring(8,9));
+                this.$set(this.timeParts, 8, am_pm);
+            }, 1000);
+        },
+        beforeDestory() {
+            window.clearInterval(this.timerIdx);
+        }
+    };
     // var MyApp = {
     //     name: "my-app",
     //     template: "<div>Welcome! Use this to build a starting layout with Vue render option</div>"
@@ -245,7 +304,8 @@
                 { path: "/categories/:cat/:art", name: "Categories  ", component: Article }
             ]
         },
-        { path: "/cards", component: CardSuffle }
+        { path: "/cards", component: CardSuffle },
+        { path: "/binaryclock", component: BinaryClock }
     ];
     var router = new VueRouter({
         routes: routes,

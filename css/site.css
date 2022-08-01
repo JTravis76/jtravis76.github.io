@@ -257,3 +257,18 @@ div.error {
         top: 0;
     }
 }
+
+/*== Standard/Binary Clock ==*/
+.clock-wrapper {
+    margin-left: auto;
+    margin-right: auto;
+    width: 200px;
+    text-align: center;
+    background-color: black;
+}
+
+.clock-wrapper .binary-clock {
+    width: 140px;
+    display: flex;
+    justify-content: space-between;
+}
