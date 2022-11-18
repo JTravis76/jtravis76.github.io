@@ -1,0 +1,28 @@
+# Dropdown List Bootstrap Addon - Razor
+
+```html
+<div class="row">
+    <div class="col-md-6">
+        <div class="grid-pager">
+            @Helper.Pagination(Model.PageIndex, Model.PageCount, Url.Content("~/Batch/Index"), $"search={Model.Search}&pagesize={Model.PageSize}&onlyactive={activeBatches}&justmine={justMine}&assignermode={Model.AssignerMode}")
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="pull-right input-group">
+            <input id="txt-batcher-search" type="text" class="form-control pull-right" style="width:250px;" placeholder="search..." value="@Model.Search" />
+            <span class="input-group-btn">
+                @Html.DropDownList("ddl-page-size", new SelectList(
+                new List<Object>{
+                   new { value = "25" , text = "25"  },
+                   new { value = "50" , text = "50" },
+                   new { value = "100" , text = "100" }
+                },
+                "value",
+                "text",
+                Model.PageSize),
+                new { @class = "form-control", @onchange = "OnPageSize_Changed();", @style = "width:auto;" })
+            </span>
+        </div>
+    </div>
+</div>
+```

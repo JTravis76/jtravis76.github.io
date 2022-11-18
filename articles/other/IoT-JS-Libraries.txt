@@ -1,0 +1,8 @@
+# IoT Javascript Libraries
+copied from email by Joshua Travis Oct 19, 2016
+
+http://johnny-five.io
+
+https://cylonjs.com
+
+http://iotjs.net

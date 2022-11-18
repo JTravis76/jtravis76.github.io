@@ -39,3 +39,70 @@ catch (Exception)
     return false;
 }
 ```
+
+.NET Core using either System.Net.Mail or SendGrid.SendGridMessage
+
+```csharp
+string EmailFromAddress = "no-reply@domain.com";
+string EmailFromName = "Help Desk";
+
+var mailMessage = new System.Net.Mail.MailMessage()
+{
+    Subject = message.Subject,
+    Body = message.HtmlContent,
+    IsBodyHtml = true,
+    From = new System.Net.Mail.MailAddress(EmailFromAddress, EmailFromName ?? EmailFromAddress),
+};
+
+/* == Copied the contacts from SendGrid object to MS Mail Message object */
+// SendGridMessage message = 
+// message.Personalizations.ForEach(p =>
+// {
+//     p.Ccs.ForEach(c =>
+//     {
+//         mailMessage.CC.Add(new System.Net.Mail.MailAddress(c.Email, c.Name));
+//     });
+
+//     p.Tos.ForEach(t =>
+//     {
+//         mailMessage.To.Add(new System.Net.Mail.MailAddress(t.Email, t.Name));
+//     });
+// });
+
+System.Net.Mail.SmtpClient smtpClient = new()
+{
+    Host = "127.0.0.1",
+    Port = 25,
+    UseDefaultCredentials = true
+};
+await smtpClient.SendMailAsync(mailMessage);
+```
+
+One idea I had was to combine the Display name and the Email into a single string value. This would avoid creating two variables to store each string.
+
+```csharp
+string str = "(User 1)user1@domain.com;(User 2)user2@domain.com";
+// Are they more than one email?
+string[] emailAddresses = str.Split(";");
+foreach (string email in emailAddresses)
+{
+    string displayName = null;
+    string emailAddress = null;
+    if (email.Trim().StartsWith('(') && email.Contains(')'))
+    {
+        // parse Display name
+        string[] emailParts = email.Split(')');
+        if (emailParts.Length > 1)
+        {
+            displayName = emailParts[0].Trim().Replace("(", "");
+            emailAddress = emailParts[1].Trim();
+        }
+    }
+    else
+    {
+        emailAddress = email;
+    }
+
+    sendGridMessage.AddTo(new EmailAddress(emailAddress, displayName));
+}
+```

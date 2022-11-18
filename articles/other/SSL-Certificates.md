@@ -65,3 +65,21 @@ certutil -mergepfx "C:\JeremyTravis.cer" "C:\JeremyTravis.pfx"
 $pwd = ConvertTo-SecureString -String "password1234" -Force -AsPlainText
 Get-ChildItem -Path Cert:\CurrentUser\My\42810B21FA76EF22E7C3AD9143B3CF7ACE160614 | Export-PfxCertificate -FilePath "C:\JT.pfx" -Password $pwd
 ```
+
+
+## Using Localhost cert for Vite/Node
+Since Visual Studio already installed a localhost certificate, I thought is would best to reuse for Vite.
+
+Below are the steps to create the cert + key in Node format.
+* Open mmc -> Certificates (Local Computer)
+* Expand to `Personal -> Certificates`. Look for localhost.
+* Right-click -> All Tasks.. -> Export
+* Select "Yes, export the private key" and provide a password
+* Using OpenSSL to split the pfx into cert + key
+
+```ps
+# Export the Key (must have password!)
+openssl pkcs12 -in localhost.pfx -nocerts -passin pass:password -out localhostkey.pem -noenc
+
+openssl pkcs12 -in localhost.pfx -nokeys -passin pass:password -out localhostcert.pem -noenc
+```

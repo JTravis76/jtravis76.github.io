@@ -1,0 +1,1 @@
+http://www.codeproject.com/Articles/1110486/Clearing-Down-a-Database-Full-of-Constraints-in-SQ

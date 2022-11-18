@@ -1,0 +1,75 @@
+google authetication vue js
+
+https://stackoverflow.com/questions/60367946/how-to-add-google-authentication-to-vue-js-using-typescript-and-component-style
+
+https://codevoweb.com/google-oauth-authentication-vue-and-node/
+
+https://github.com/phanan/vue-google-signin-button/blob/master/index.js
+
+https://developers.google.com/identity/sign-in/web/reference#googleusergetbasicprofile
+
+https://github.com/TinyNova/vue-google-oauth/blob/master/index.js
+
+
+```html
+<!DOCTYPE html>
+<head>
+  <title>Redirecting</title>
+</head>
+<body
+  bgcolor="#ffffff"
+  text="#000000"
+  link="#0000cc"
+  vlink="#551a8b"
+  alink="#ff0000"
+>
+  <form
+    jsname="RimvDb"
+    action="https://accounts.google.com/o/oauth2/v2/auth?trampoline=1&amp;as=S-1744404228%3A1667245145013541"
+    method="POST"
+    id="hiddenpost"
+  >
+    <input type="hidden" name="scope" value="openid profile email" /><input
+      type="hidden"
+      name="response_type"
+      value="code"
+    /><input
+      type="hidden"
+      name="redirect_uri"
+      value="https://localhost:7182/signin-google"
+    /><input
+      type="hidden"
+      name="state"
+      value="CfDJ8N0rHijYMKJIjzSP2hsOVEBtOjXugDbzKmUBcRKaMHR49ZKyHlLojYo_RkdtdpJIvj-Yr_ajXVfRw7toAYp-cIf1hTS05OrxRiK-PQoZhWhyyQ3Faafwa8OjhLLdnXYwutZH9wd9twcVNPQr8k3are0CDlAZCoWkJlYYntJp0dk3AHa_Jg1UKGEdAeBl-Uf0eLLvEzCsOIIcv7B05eOKmxFDPfMzf1C5mDmBwd8rqYE2ILCUiMEc1nuF5r7MiJ36W8WgNehf_Uz1n82Qaq0NdN2STdPoudgp2ChSTg59gZgs"
+    /><input
+      type="hidden"
+      name="client_id"
+      value="647742716380-r2vuo10o9pfnrv719btvu14phd0bkcrn.apps.googleusercontent.com"
+    /><noscript
+      ><p class="title">
+        The browser you’re using doesn’t support JavaScript, or has JavaScript
+        turned off.
+      </p>
+      <p>
+        To keep your Google Account secure, we recommend that you sign in on a
+        browser that has JavaScript turned on.<a
+          href="https://support.google.com/accounts/answer/7675428"
+          target="_blank"
+          >Learn how</a
+        >
+      </p>
+      <input
+        type="submit"
+        name="nojssubmit"
+        id="nojssubmit"
+        value="Continue without Javascript" /><img
+        class="invisible"
+        alt=""
+        src="https://accounts.google.com/white.gif?source=hph2&amp;nojavascript=1"
+    /></noscript>
+  </form>
+  <script nonce="gmjhkLUIoPl6iyucAsLP3w">
+    document.forms[0].submit();
+  </script>
+</body>
+```
