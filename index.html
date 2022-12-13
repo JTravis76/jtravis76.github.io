@@ -1,111 +1,205 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="description" content="Blogger site powered by VueJs and Markdown">
+    <meta
+      name="description"
+      content="Blogger site powered by VueJs and Markdown"
+    />
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <!-- Add to homescreen for Chrome on Android -->
-    <meta name="mobile-web-app-capable" content="yes">
-    <link rel="icon" sizes="192x192" href="./img/android-icon-192x192.png">
+    <meta name="mobile-web-app-capable" content="yes" />
+    <link rel="icon" sizes="192x192" href="./img/android-icon-192x192.png" />
     <!-- Add to homescreen for Safari on iOS -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="Radar-ADAT">
-    <link rel="apple-touch-icon-precomposed" href="./img/apple-icon-120x120.png">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-title" content="Radar-ADAT" />
+    <link
+      rel="apple-touch-icon-precomposed"
+      href="./img/apple-icon-120x120.png"
+    />
     <!-- Tile icon for Win8 (144x144 + tile color) -->
-    <meta name="msapplication-TileImage" content="./img/ms-icon-144x144.png">
-    <meta name="msapplication-TileColor" content="#009966">
+    <meta name="msapplication-TileImage" content="./img/ms-icon-144x144.png" />
+    <meta name="msapplication-TileColor" content="#009966" />
     <!-- Browser favicon -->
     <link rel="icon" href="./img/logo-32.png" type="image/png" />
     <!-- <link rel="shortcut icon" href="./favicon.ico"> -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.8.0/css/bulma.min.css" integrity="sha512-3PB813HQv0BAFu1e/UcmZ9+6IJOE4DQkydjxLaldZdm4DoL1anF7TPxUk3IXo5cusX1dG0klUIZ0RUo6qyxnDw==" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha512-9BwLAVqqt6oFdXohPLuNHxhx36BVj5uGSGmizkmGkgl3uMSgNalKc/smum+GJU/TTP0jy0+ruwC3xNAk3F759A==" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/4.0.0/github-markdown.min.css" integrity="sha512-Oy18vBnbSJkXTndr2n6lDMO5NN31UljR8e/ICzVPrGpSud4Gkckb8yUpqhKuUNoE+o9gAb4O/rAxxw1ojyUVzg==" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.2/styles/github.min.css" integrity="sha512-7QTQ5Qsc/IL1k8UU2bkNFjpKTfwnvGuPYE6fzm6yeneWTEGiA3zspgjcTsSgln9m0cn3MgyE7EnDNkF1bB/uCw==" crossorigin="anonymous" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.8.0/css/bulma.min.css"
+      integrity="sha512-3PB813HQv0BAFu1e/UcmZ9+6IJOE4DQkydjxLaldZdm4DoL1anF7TPxUk3IXo5cusX1dG0klUIZ0RUo6qyxnDw=="
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
+      integrity="sha512-9BwLAVqqt6oFdXohPLuNHxhx36BVj5uGSGmizkmGkgl3uMSgNalKc/smum+GJU/TTP0jy0+ruwC3xNAk3F759A=="
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/4.0.0/github-markdown.min.css"
+      integrity="sha512-Oy18vBnbSJkXTndr2n6lDMO5NN31UljR8e/ICzVPrGpSud4Gkckb8yUpqhKuUNoE+o9gAb4O/rAxxw1ojyUVzg=="
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.2/styles/github.min.css"
+      integrity="sha512-7QTQ5Qsc/IL1k8UU2bkNFjpKTfwnvGuPYE6fzm6yeneWTEGiA3zspgjcTsSgln9m0cn3MgyE7EnDNkF1bB/uCw=="
+      crossorigin="anonymous"
+    />
     <link rel="stylesheet" href="./css/site.css" />
     <!-- <link rel="import" href="./db/data.json" /> -->
     <title>Home - My Portfolio</title>
-</head>
-<body>
+  </head>
+  <body>
     <noscript>
-        <strong>We're sorry this application doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+      <strong
+        >We're sorry this application doesn't work properly without JavaScript
+        enabled. Please enable it to continue.</strong
+      >
     </noscript>
     <div id="app" v-cloak>
-        <nav class="navbar is-primary" role="navigation" aria-label="main navigation">
-            <div class="navbar-brand">
-                <router-link class="navbar-item" to="/">
-                    <img src="./img/logo-header.png" width="112" height="28" />
-                    <strong>My Portfolio</strong>
-                </router-link>
-                <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="main-menu">
-                    <span aria-hidden="true"></span>
-                    <span aria-hidden="true"></span>
-                    <span aria-hidden="true"></span>
-                </a>
-            </div>
-            <div id="main-menu" class="navbar-menu">
-                <div class="navbar-start">
-                    <router-link to="/categories" class="navbar-item">Blogs</router-link>
-                    <!-- <router-link to="/about" class="navbar-item">About</router-link> -->
-                    <!-- <a class="navbar-item">Documentation</a> -->
-                    <div class="navbar-item has-dropdown is-hoverable"> 
-                        <a class="navbar-link">Fun Stuff</a> 
-                        <div class="navbar-dropdown"> 
-                            <router-link to="/cards" class="navbar-item">Cards Shuffle</router-link> 
-                            <!-- <router-link to="/binaryclock" class="navbar-item">Binary Clock</router-link>  -->
-                            <!-- <a class="navbar-item">Jobs</a> 
+      <nav
+        class="navbar is-primary"
+        role="navigation"
+        aria-label="main navigation"
+      >
+        <div class="navbar-brand">
+          <router-link class="navbar-item" to="/">
+            <img src="./img/logo-header.png" width="112" height="28" />
+            <strong>My Portfolio</strong>
+          </router-link>
+          <a
+            role="button"
+            class="navbar-burger burger"
+            aria-label="menu"
+            aria-expanded="false"
+            data-target="main-menu"
+          >
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
+        </div>
+        <div id="main-menu" class="navbar-menu">
+          <div class="navbar-start">
+            <router-link to="/resume" class="navbar-item">Resume</router-link>
+            <router-link to="/categories" class="navbar-item"
+              >Blogs</router-link
+            >
+            <!-- <router-link to="/about" class="navbar-item">About</router-link> -->
+            <!-- <a class="navbar-item">Documentation</a> -->
+            <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link">Fun Stuff</a>
+              <div class="navbar-dropdown">
+                <router-link to="/cards" class="navbar-item"
+                  >Cards Shuffle</router-link
+                >
+                <!-- <router-link to="/binaryclock" class="navbar-item">Binary Clock</router-link>  -->
+                <!-- <a class="navbar-item">Jobs</a> 
                             <a class="navbar-item">Contact</a> 
                             <hr class="navbar-divider"> 
                             <a class="navbar-item">Report an issue</a>  -->
-                        </div> 
-                    </div>
-                </div>
-                <div class="navbar-end">
-                    <div class="navbar-item">
-                        <div class="buttons">
-                            <a href="http://www.linkedin.com/in/jtravis76/" target="blank"><img src="./img/linkedin.png"></a>
-                            <a href="https://github.com/JTravis76/" target="blank"><img src="./img/gh-icon.png"></a>
-                            <a href="https://www.youtube.com/channel/UCnbpdL5ZFQzEOpYh-2gbrsQ/" target="blank"><img src="./img/yt-icon.png"></a>
-                            <!-- <a class="button is-white"><strong>Sign up</strong></a> 
-                                <a class="button is-light">Log in</a> -->
-                        </div>
-                    </div>
-                </div>
+              </div>
             </div>
-        </nav>
-        <section class="section" v-cloak>
-            <ol class="breadcrumb">
-                <li v-for="(crumbs, idx) in $store.state.Breadcrumbs" :key="idx" >
-                    <router-link :to="crumbs.Link" :class="[idx === ($store.state.Breadcrumbs.length - 1) ? 'active' : '']" >
-                        <template v-if="crumbs.Name === 'Home'">
-                            <span class="fa fa-home"></span>&nbsp;
-                        </template>
-                        {{crumbs.Name}}
-                    </router-link>
-                </li>
-            </ol>
-            <router-view></router-view>
-        </section>
-        <footer class="footer"> 
-            <div class="content has-text-centered"> 
-                <p> &copy; {{year}} <strong>Template</strong> by <router-link to="/">Jeremy R. Travis</router-link>. 
-                    <br /> 
-                    <a href="https://bulma.io" target="_blank"> 
-                        <img src="./img/made-with-bulma.png" alt="Made with Bulma" width="128" height="24"> 
-                    </a>
-                </p> 
-            </div> 
-        </footer>
+          </div>
+          <div class="navbar-end">
+            <div class="navbar-item">
+              <div class="buttons">
+                <a href="http://www.linkedin.com/in/jtravis76/" target="blank"
+                  ><img src="./img/linkedin.png"
+                /></a>
+                <a href="https://github.com/JTravis76/" target="blank"
+                  ><img src="./img/gh-icon.png"
+                /></a>
+                <a href="https://www.youtube.com/@jtravis76/" target="blank"
+                  ><img src="./img/yt-icon.png"
+                /></a>
+                <!-- <a class="button is-white"><strong>Sign up</strong></a> 
+                                <a class="button is-light">Log in</a> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <section class="section" v-cloak>
+        <ol class="breadcrumb">
+          <li v-for="(crumbs, idx) in $store.state.Breadcrumbs" :key="idx">
+            <router-link
+              :to="crumbs.Link"
+              :class="[idx === ($store.state.Breadcrumbs.length - 1) ? 'active' : '']"
+            >
+              <template v-if="crumbs.Name === 'Home'">
+                <span class="fa fa-home"></span>&nbsp;
+              </template>
+              {{crumbs.Name}}
+            </router-link>
+          </li>
+        </ol>
+        <router-view></router-view>
+      </section>
+      <footer class="footer">
+        <div class="content has-text-centered">
+          <p>
+            &copy; {{year}} <strong>Template</strong> by
+            <router-link to="/">Jeremy R. Travis</router-link>.
+            <br />
+            <a href="https://bulma.io" target="_blank">
+              <img
+                src="./img/made-with-bulma.png"
+                alt="Made with Bulma"
+                width="128"
+                height="24"
+              />
+            </a>
+          </p>
+        </div>
+      </footer>
     </div>
     <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.14/vue.js" integrity="sha512-pSyYzOKCLD2xoGM1GwkeHbdXgMRVsSqQaaUoHskx/HF09POwvow2VfVEdARIYwdeFLbu+2FCOTRYuiyeGxXkEg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.14/vue.min.js" integrity="sha512-XdUZ5nrNkVySQBnnM5vzDqHai823Spoq1W3pJoQwomQja+o4Nw0Ew1ppxo5bhF2vMug6sfibhKWcNJsG8Vj9tg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue-router/3.5.4/vue-router.min.js" integrity="sha512-zxWuRslhjyZyRAYInXTNl4vC/vBBwLQuodFnPmvYAEvlv9XCCfi1R3KqBCsT6f9rk56OetG/7KS9dOfINL1KCQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vuex/3.6.2/vuex.min.js" integrity="sha512-Tkxwo8dZEZTmje5QT9uodCqe2XGbZdBXU8uC4nskBt0kwR99Anzkz8JCSMByfoqjLTHcTuIB8fsmED3b9Ljp3g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.27.2/axios.min.js" integrity="sha512-odNmoc1XJy5x1TMVMdC7EMs3IVdItLPlCeL5vSUPN2llYKMJ2eByTTAIiiuqLg+GdNr9hF6z81p27DArRFKT7A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/markdown-it/11.0.0/markdown-it.min.js" integrity="sha512-0tDdhRf9dcDufaaOQQdvywK56y+cwomy6rjOrqk05N61cQOTdO2Cqqgq8EfXVBDXJe0TH9smqvDicQzMiBG14g==" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.2/highlight.min.js" integrity="sha512-Py5DS+2kY5uWkmxYP9RYSyQgigyNBXj1cLT7w74maaj/UPkc1qErqYHpcOAgchJY+BSnS745CptJPkqJ2z/nvg==" crossorigin="anonymous"></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.14/vue.min.js"
+      integrity="sha512-XdUZ5nrNkVySQBnnM5vzDqHai823Spoq1W3pJoQwomQja+o4Nw0Ew1ppxo5bhF2vMug6sfibhKWcNJsG8Vj9tg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/vue-router/3.5.4/vue-router.min.js"
+      integrity="sha512-zxWuRslhjyZyRAYInXTNl4vC/vBBwLQuodFnPmvYAEvlv9XCCfi1R3KqBCsT6f9rk56OetG/7KS9dOfINL1KCQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/vuex/3.6.2/vuex.min.js"
+      integrity="sha512-Tkxwo8dZEZTmje5QT9uodCqe2XGbZdBXU8uC4nskBt0kwR99Anzkz8JCSMByfoqjLTHcTuIB8fsmED3b9Ljp3g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.27.2/axios.min.js"
+      integrity="sha512-odNmoc1XJy5x1TMVMdC7EMs3IVdItLPlCeL5vSUPN2llYKMJ2eByTTAIiiuqLg+GdNr9hF6z81p27DArRFKT7A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/markdown-it/11.0.0/markdown-it.min.js"
+      integrity="sha512-0tDdhRf9dcDufaaOQQdvywK56y+cwomy6rjOrqk05N61cQOTdO2Cqqgq8EfXVBDXJe0TH9smqvDicQzMiBG14g=="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.2/highlight.min.js"
+      integrity="sha512-Py5DS+2kY5uWkmxYP9RYSyQgigyNBXj1cLT7w74maaj/UPkc1qErqYHpcOAgchJY+BSnS745CptJPkqJ2z/nvg=="
+      crossorigin="anonymous"
+    ></script>
     <script type="text/javascript" src="./js/linq.js"></script>
     <script type="text/javascript" defer src="./js/app.js"></script>
-</body>
+  </body>
 </html>
