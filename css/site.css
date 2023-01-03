@@ -267,8 +267,31 @@ div.error {
     background-color: black;
 }
 
-.clock-wrapper .binary-clock {
-    width: 140px;
-    display: flex;
-    justify-content: space-between;
+.binary-wrapper {
+  width: 200px;
+  height: 124px;
+  background-color:black;
+  color: white;
+  padding:4px;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+
+.binary-wrapper .led {
+  width: 24px;
+  height: 24px;
+  margin: 2px;
+  border: 1px solid red;
+  border-radius: 50%;
+  background-color: rgba(255,0,0,0.3);
+}
+
+.binary-wrapper .active {
+  background-color: rgba(255,0,0,0.8);
+}
+.binary-wrapper .hidden {
+  border: 0px solid transparent;
+  background-color: transparent;
 }

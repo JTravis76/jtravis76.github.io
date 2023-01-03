@@ -13,7 +13,9 @@
       ? markdownit["default"]
       : markdownit;
 
-  var isDev = window.location.hostname.indexOf("localhost") > -1;
+  var isDev =
+    window.location.hostname.indexOf("localhost") > -1 ||
+    window.location.hostname.indexOf("127.0.0.1") > -1;
   var config = {
     state: {
       AppName: "Vue-Blogger",
@@ -259,28 +261,23 @@
   var BinaryClock = {
     name: "binary-clock",
     template: `<div class="clock-wrapper">
-        <div class="binary-clock">
-            <div>
-                <img alt="0" src="./img/clock/off.png" />
-                <img alt="0" src="./img/clock/off.png" />
+        <div class="binary-wrapper">
+          <template v-for="(led, idx) in leds.split('')" :key="idx">
+            <div
+              :class="{ active: led === '1', hidden: led === '-'}"
+              class="led">
             </div>
-            <div>
-                <img alt="0" src="./img/clock/off.png" />
-                <img alt="0" src="./img/clock/off.png" />
-            </div>
-            <div>
-                <img alt="0" src="./img/clock/off.png" />
-                <img alt="0" src="./img/clock/off.png" />
-            </div>
+          </template>
         </div>
         <br />
         <template v-for="part in timeParts">
           <img :alt="part" :src="'./img/clock/' + part + '.gif'" />
         </template>
-        </div>`,
+      </div>`,
     data() {
       return {
         timeParts: ["8", "8", "dgc", "8", "8", "dgc", "8", "8", "am"],
+        leds: "--0000000000000000000000",
         timerIdx: 0,
       };
     },
@@ -308,10 +305,28 @@
         this.$set(this.timeParts, 6, timeStr.substring(7, 8));
         this.$set(this.timeParts, 7, timeStr.substring(8, 9));
         this.$set(this.timeParts, 8, am_pm);
+
+        let newTime = "--";
+        const hh = d.getHours().toString().padStart(2, "0");
+        const mm = d.getMinutes().toString().padStart(2, "0");
+        const ss = d.getSeconds().toString().padStart(2, "0");
+        newTime += this.toBinary(hh[0]).substring(2, 4);
+        newTime += this.toBinary(hh[1]);
+        newTime += this.toBinary(mm[0]);
+        newTime += this.toBinary(mm[1]);
+        newTime += this.toBinary(ss[0]);
+        newTime += this.toBinary(ss[1]);
+        this.leds = newTime;
       }, 1000);
     },
     beforeDestory() {
       window.clearInterval(this.timerIdx);
+    },
+    methods: {
+      toBinary(v) {
+        const num = parseInt(v.toString(), 10);
+        return num.toString(2).padStart(4, "0");
+      },
     },
   };
   const MetronomePlayer = {
