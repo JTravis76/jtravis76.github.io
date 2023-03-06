@@ -26,10 +26,10 @@ Body:
 ```
 
 > NOTE! including `"ticketid": "0",` in the JSON body will result in a new service request.
-        But the ticket id is set to "0", which is difficlut to search against.
+        But the ticket id is set to "0", which is difficult to search against.
 
 
-### Attachments can be included along with the inital creation.
+### Attachments can be included along with the initial creation.
 
 > NOTE!: the `documentdata` must be a base64 encoded document
 
@@ -99,6 +99,7 @@ reportedby = this is a user from the 'Person' table, not 'User' table
     * https://{server}:{port}/maximo/oslc/oas?includeaction=1
 
 * JSON Schemas
+    * https://{server}:{port}/maximo/oslc/jsonschemas/%OBJECT_STRUCTURE%
     * https://{server}:{port}/maximo/oslc/jsonschemas/MXAPISR
 
 * (Maybe) Userful Links

@@ -18,17 +18,16 @@
     window.location.hostname.indexOf("127.0.0.1") > -1;
   var config = {
     state: {
-      AppName: "Vue-Blogger",
-      FullAppName: "Vue Blogger",
-      Description: "Blogging site built upon Vue Js",
-      BaseURL: isDev ? "./" : "https://jtravis76.github.io/",
-      Version: "0.0.0.0",
-      VersionDate: "2020-01-01T00:00:00Z",
-      Environment: "== LOCAL == LOCAL == LOCAL ==",
+      appName: "Vue-Blogger",
+      description: "Blogging site built upon Vue Js",
+      baseURL: isDev ? "./" : "https://jtravis76.github.io/",
+      version: "0.0.0.0",
+      versionDate: "2020-01-01T00:00:00Z",
+      environment: "== LOCAL == LOCAL == LOCAL ==",
     },
     getters: {
       baseURL: function (state) {
-        return state.BaseURL;
+        return state.baseURL;
       },
     },
   };
@@ -62,13 +61,93 @@
        C183.312,406.581,178.377,403.734,173.576,405.019z M51.298,156.782c-4.801,1.287-7.65,6.222-6.364,11.023l2.217,8.274
        c1.078,4.021,4.714,6.673,8.688,6.673c0.771,0,1.555-0.1,2.335-0.309c4.801-1.287,7.65-6.222,6.364-11.023l-2.217-8.274
        C61.034,158.344,56.101,155.496,51.298,156.782z M297.52,281.322c-4.971,0-9,4.029-9,9v8.565c0,4.971,4.029,9,9,9s9-4.029,9-9
-       v-8.565C306.52,285.352,302.491,281.322,297.52,281.322z"/><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></svg>`,
+       v-8.565C306.52,285.352,302.491,281.322,297.52,281.322z"/></svg>`,
+  };
+  const fontBinaryClock = {
+    name: "font-binary-clock",
+    template: `<svg width="48mm" height="48mm" viewBox="0 0 48 48" version="1.1" id="svg5" xml:space="preserve" 
+    inkscape:version="1.2.1 (9c6d41e410, 2022-07-14)" sodipodi:docname="binary-clock.svg" 
+    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" 
+    xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+    xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/"> <title id="title197">binary clock</title> 
+    <sodipodi:namedview id="namedview7" pagecolor="#ffffff" bordercolor="#000000" borderopacity="0.25" inkscape:showpageshadow="2" 
+    inkscape:pageopacity="0.0" inkscape:pagecheckerboard="0" inkscape:deskcolor="#d1d1d1" inkscape:document-units="mm" showgrid="false" 
+    inkscape:zoom="1.1893044" inkscape:cx="160.17766" inkscape:cy="60.960003" inkscape:window-width="1720" inkscape:window-height="1361" 
+    inkscape:window-x="-9" inkscape:window-y="-9" inkscape:window-maximized="1" inkscape:current-layer="layer1" /> <defs id="defs2" /> 
+    <g inkscape:label="Layer 1" inkscape:groupmode="layer" id="layer1"> <path style="stroke-width:0.202633" d="m 2.4434106,37.068887 
+    c -2.6584739,-1.356219 -1.91280431,-5.367189 1.0600973,-5.702285 2.3248311,-0.262043 4.0522196,2.164104 3.0478223,4.280714 
+    -0.702867,1.481188 -2.6620577,2.159173 -4.1079196,1.421571 z m 8.1053484,0 c -2.6584685,-1.356219 -1.9128065,-5.367189 1.060105,-5.702285 
+    2.324829,-0.262043 4.05222,2.164104 3.047826,4.280714 -0.70288,1.481188 -2.662068,2.159173 -4.107931,1.421571 z m 8.105356,0 c 
+    -2.658479,-1.356219 -1.912803,-5.367189 1.060091,-5.702285 2.324834,-0.262043 4.052224,2.164104 3.047822,4.280714 -0.70286,1.481188 
+    -2.662053,2.159173 -4.107913,1.421571 z m 8.105344,0 c -2.658472,-1.356219 -1.9128,-5.367189 1.060105,-5.702285 2.324828,-0.262043 
+    4.052213,2.164104 3.047816,4.280714 -0.702866,1.481188 -2.662056,2.159173 -4.107921,1.421571 z m 8.105346,0 c -2.658464,-1.356219 
+    -1.912794,-5.367189 1.060111,-5.702285 2.324828,-0.262043 4.052217,2.164104 3.047822,4.280714 -0.702873,1.481188 -2.662065,2.159173 
+    -4.107933,1.421571 z m 8.105365,0 c -2.658479,-1.356219 -1.91281,-5.367189 1.060095,-5.702285 2.324831,-0.262043 4.052216,2.164104 
+    3.047819,4.280714 -0.702865,1.481188 -2.662059,2.159173 -4.107914,1.421571 z M 2.4434106,29.774068 c -2.6584739,-1.356216 
+    -1.91280431,-5.36719 1.0600973,-5.702281 2.3248311,-0.262045 4.0522196,2.164101 3.0478223,4.280721 -0.702867,1.481176 -2.6620577,2.159163 
+    -4.1079196,1.42156 z m 8.1053484,0 c -2.6584685,-1.356216 -1.9128065,-5.36719 1.060105,-5.702281 2.324829,-0.262045 4.05222,2.164101 
+    3.047826,4.280721 -0.70288,1.481176 -2.662068,2.159163 -4.107931,1.42156 z m 8.105356,0 c -2.658479,-1.356216 -1.912803,-5.36719 
+    1.060091,-5.702281 2.324834,-0.262045 4.052224,2.164101 3.047822,4.280721 -0.70286,1.481176 -2.662053,2.159163 -4.107913,1.42156 
+    z m 8.105344,0 c -2.658472,-1.356216 -1.9128,-5.36719 1.060105,-5.702281 2.324828,-0.262045 4.052213,2.164101 3.047816,4.280721 
+    -0.702866,1.481176 -2.662056,2.159163 -4.107921,1.42156 z m 8.105346,0 c -2.658464,-1.356216 -1.912794,-5.36719 1.060111,-5.702281 
+    2.324828,-0.262045 4.052217,2.164101 3.047822,4.280721 -0.702873,1.481176 -2.662065,2.159163 -4.107933,1.42156 z m 8.105365,0 
+    c -2.658479,-1.356216 -1.91281,-5.36719 1.060095,-5.702281 2.324831,-0.262045 4.052216,2.164101 3.047819,4.280721 -0.702865,1.481176 
+    -2.662059,2.159163 -4.107914,1.42156 z M 10.548759,22.276621 c -2.6584685,-1.356214 -1.9128065,-5.367183 1.060105,-5.702286 
+    2.324829,-0.262038 4.05222,2.164101 3.047826,4.280705 -0.70288,1.481201 -2.662068,2.159184 -4.107931,1.421581 z m 8.105356,0 
+    c -2.658479,-1.356214 -1.912803,-5.367183 1.060091,-5.702286 2.324834,-0.262038 4.052224,2.164101 3.047822,4.280705 -0.70286,1.481201 
+    -2.662053,2.159184 -4.107913,1.421581 z m 8.105344,0 c -2.658472,-1.356214 -1.9128,-5.367183 1.060105,-5.702286 2.324828,-0.262038 
+    4.052213,2.164101 3.047816,4.280705 -0.702866,1.481201 -2.662056,2.159184 -4.107921,1.421581 z m 8.105346,0 c -2.658464,-1.356214 
+    -1.912794,-5.367183 1.060111,-5.702286 2.324828,-0.262038 4.052217,2.164101 3.047822,4.280705 -0.702873,1.481201 -2.662065,2.159184 
+    -4.107933,1.421581 z m 8.105365,0 c -2.658479,-1.356214 -1.91281,-5.367183 1.060095,-5.702286 2.324831,-0.262038 4.052216,2.164101 
+    3.047819,4.280705 -0.702865,1.481201 -2.662059,2.159184 -4.107914,1.421581 z M 10.548759,14.981803 c -2.6584685,-1.35622 
+    -1.9128065,-5.3671938 1.060105,-5.7022832 2.324829,-0.2620421 4.05222,2.1641002 3.047826,4.2807192 -0.70288,1.481176 
+    -2.662068,2.159169 -4.107931,1.421564 z m 8.105356,0 c -2.658479,-1.35622 -1.912803,-5.3671938 1.060091,-5.7022832 2.324834,-0.2620421 
+    4.052224,2.1641002 3.047822,4.2807192 -0.70286,1.481176 -2.662053,2.159169 -4.107913,1.421564 z m 8.105344,0 c -2.658472,-1.35622 
+    -1.9128,-5.3671938 1.060105,-5.7022832 2.324828,-0.2620421 4.052213,2.1641002 3.047816,4.2807192 -0.702866,1.481176 -2.662056,2.159169 
+    -4.107921,1.421564 z m 8.105346,0 c -2.658464,-1.35622 -1.912794,-5.3671938 1.060111,-5.7022832 2.324828,-0.2620421 4.052217,2.1641002 
+    3.047822,4.2807192 -0.702873,1.481176 -2.662065,2.159169 -4.107933,1.421564 z m 8.105365,0 c -2.658479,-1.35622 -1.91281,-5.3671938 
+    1.060095,-5.7022832 2.324831,-0.2620421 4.052216,2.1641002 3.047819,4.2807192 -0.702865,1.481176 -2.662059,2.159169 -4.107914,1.421564 z" 
+    id="path193" /> </g> <metadata id="metadata195"> <rdf:RDF> <cc:Work rdf:about=""> <dc:title>binary clock</dc:title> </cc:Work> 
+    </rdf:RDF> </metadata> </svg>`,
   };
   var HomePage = {
     name: "home-page",
-    template:
-      '<div> <div class="container"> <div class="columns"> <div class="column is-one-third"> <div class="pic" style="padding:5px;"> <img id="profile-pic" class="tilt" src="./img/me.png"> </div> <!-- <aside class="menu" style="padding-top: 50px;"> <p class="menu-label"> General </p> <ul class="menu-list"> <li><a>Dashboard</a></li> <li><a>Customers</a></li> </ul> <p class="menu-label"> Administration </p> <ul class="menu-list"> <li><a>Team Settings</a></li> <li> <a class="is-active">Manage Your Team</a> <ul> <li><a>Members</a></li> <li><a>Plugins</a></li> <li><a>Add a member</a></li> </ul> </li> <li><a>Invitations</a></li> <li><a>Cloud Storage Environment Settings</a></li> <li><a>Authentication</a></li> </ul> <p class="menu-label"> Transactions </p> <ul class="menu-list"> <li><a>Payments</a></li> <li><a>Transfers</a></li> <li><a>Balance</a></li> </ul> </aside> --> </div> <div class="column"> <div class="title">Jeremy R. Travis</div> <div class="bio" style="font-family:\'Happy Monkey\',cursive; font-size: 20px;"> <p> Out of high school, I worked a few plant labor jobs until the year of 2004; when I was ask for an office position. After learning the ropes of a new job, I began finding interest in database and ASP.NET. Been experimenting with Visual Studio C++ prior to this, thinking I wanted to be a game developer. </p> <p> Working as an Office Professional, my boss had given me the liberty to improve a few processes. I quickly began to develop a dashboard to display our daily metrics using web form to save data entered by another employee. This replaces most of those boring spreadsheet. </p> <p> Later learn, how powerful and useful VBA macros were in Microsoft Excel. I became a macro writing wizard. Soon, everyone wanted me to write scripts to help their daily tasks. </p> <p> All that ended the year of 2009, as the plant was closing it door due to a buyout. I started working at Life Ambulance as a Tier I helpdesk. In a few months of quality work, I was promoted to Network / System Administrator. Two years later, First Med bought out Life Ambulance in July of 2011. Through hard work and willing to help the company, I developed a HR portal to integrate with in-house dispatch software. Which the portal eased in many Human Resource related tasks, mainly exporting employee hours into third-party vendor software for payroll. </p> <p> In August 2012, I was promoted to .NET Developer / IT Specialist. Join the Development team to help write enhancement to the company\'s dispatch software. Later, other projects such as; document management system, improvement in other portals for employees, billing department, etc. </p> <p>&nbsp;</p> <h3 class="title">I design and build amazing things.</h3> </div> </div> </div> </div> <section class="section"> <div class="container"> <h1 class="title has-text-centered">Portfolio</h1> <div class="columns"><div class="column has-text-centered"><h4 class="portfolio-title">JQuery Modal Picker</h4><a href="https://jtravis76.github.io/Modal-Picker/" target="blank"><div class="portfolio-item"><span class="fa fa-plug"></span></div></a></div><div class="column has-text-centered"><h4 class="portfolio-title">Card Shuffle</h4><router-link to="/cards"><div class="portfolio-item"><FontPlayingCards width="200" style="padding: 20px; fill: #3273dc"></FontPlayingCards></div></router-link></router-link></div><div class="column has-text-centered"><h4 class="portfolio-title">Coming Soon</h4><a href="#" target="blank"><div class="portfolio-item"><i class="fa fa-code"></i></div></a></div><div class="column has-text-centered">&nbsp;</div><div class="column has-text-centered">&nbsp;</div></div></div></section> </div>',
-    components: { FontPlayingCards: fontPlayingCards },
+    template: `<div> <div class="container"> <div class="columns"> <div class="column is-one-third"> <div class="pic" style="padding: 5px"> 
+      <img id="profile-pic" class="tilt" src="./img/me.png" /> </div> <!-- <aside class="menu" style="padding-top: 50px;"> 
+      <p class="menu-label"> General </p> <ul class="menu-list"> <li><a>Dashboard</a></li> <li><a>Customers</a></li> </ul> 
+      <p class="menu-label"> Administration </p> <ul class="menu-list"> <li><a>Team Settings</a></li> <li> <a class="is-active">Manage Your Team</a> 
+      <ul> <li><a>Members</a></li> <li><a>Plugins</a></li> <li><a>Add a member</a></li> </ul> </li> <li><a>Invitations</a></li> 
+      <li><a>Cloud Storage Environment Settings</a></li> <li><a>Authentication</a></li> </ul> <p class="menu-label"> Transactions </p> 
+      <ul class="menu-list"> <li><a>Payments</a></li> <li><a>Transfers</a></li> <li><a>Balance</a></li> </ul> </aside> --> 
+      </div> <div class="column"> <div class="title">Jeremy R. Travis</div> <div class="bio" 
+      style="font-family: 'Happy Monkey', cursive; font-size: 20px" > <p> Out of high school, I worked a few plant labor jobs until 
+      the year of 2004; when I was ask for an office position. After learning the ropes of a new job, I began finding interest in database 
+      and ASP.NET. Been experimenting with Visual Studio C++ prior to this, thinking I wanted to be a game developer. </p> <p> Working as 
+      an Office Professional, my boss had given me the liberty to improve a few processes. I quickly began to develop a dashboard to 
+      display our daily metrics using web form to save data entered by another employee. This replaces most of those boring spreadsheet. 
+      </p> <p> Later learn, how powerful and useful VBA macros were in Microsoft Excel. I became a macro writing wizard. Soon, everyone 
+      wanted me to write scripts to help their daily tasks. </p> <p> All that ended the year of 2009, as the plant was closing it door 
+      due to a buyout. I started working at Life Ambulance as a Tier I helpdesk. In a few months of quality work, I was promoted to 
+      Network / System Administrator. Two years later, First Med bought out Life Ambulance in July of 2011. Through hard work 
+      Administration willing to help the company, I developed a HR portal to integrate with in-house dispatch software. Which the 
+      portal eased in many Human Resource related tasks, mainly exporting employee hours into third-party vendor software for payroll. 
+      </p> <p> In August 2012, I was promoted to .NET Developer / IT Specialist. Join the Development team to help write enhancement 
+      to the company\'s dispatch software. Later, other projects such as; document management system, improvement in other portals for 
+      employees, billing department, etc. </p> <p>&nbsp;</p> <h3 class="title">I design and build amazing things.</h3> </div> </div> 
+      </div> </div> <section class="section"> <div class="container"> <h1 class="title has-text-centered">Portfolio</h1> <div class="columns"> 
+      <div class="column has-text-centered"> <h4 class="portfolio-title">JQuery Modal Picker</h4> <a href="https://jtravis76.github.io/Modal-Picker/" 
+      target="blank" title="JQuery Modal Picker" > <div class="portfolio-item"> <span class="fa fa-plug"></span> </div> </a> </div> 
+      <div class="column has-text-centered"> <h4 class="portfolio-title">Card Shuffle</h4> <router-link to="/cards" title="card shuffle"> 
+      <div class="portfolio-item"> <FontPlayingCards width="200" class="svg-icon" ></FontPlayingCards> </div> </router-link> </div> 
+      <div class="column has-text-centered"> <h4 class="portfolio-title">Binary Clock</h4> <router-link to="/binaryclock" title="Binary Clock"> 
+      <div class="portfolio-item"> <FontBinaryClock width="200" class="svg-icon" ></FontBinaryClock> </div> </router-link> </div> 
+      <div class="column has-text-centered"> <h4 class="portfolio-title">Coming Soon</h4> <a href="#" target="blank" title="coming soon"> 
+      <div class="portfolio-item"> <i class="fa fa-code"></i> </div> </a> </div> <div class="column has-text-centered">&nbsp;</div> 
+      <div class="column has-text-centered">&nbsp;</div> </div> </div> </section> </div>`,
+    components: {
+      FontPlayingCards: fontPlayingCards,
+      FontBinaryClock: fontBinaryClock,
+    },
   };
   var NotFound = {
     name: "not-found",
@@ -357,6 +436,90 @@
       },
     },
   };
+  const ToggleSwitch = {
+    name: "toggle-switch",
+    template:
+      '<div class="toggle-switch--container"><input type="checkbox" name="switch" id="switch"><label for="switch"></label></div>',
+  };
+  const BubbleTip = {
+    name: "bubble-tip",
+    template: `
+    <div class="bubble-tip--wrapper">
+    <div><button type="button" class="nav-button">&times;</button></div>
+    <div class="bubble-tip--img-container">
+      <div class="bubble-tip--overlay">
+        <button type="button" class="btn-1">
+          <span>1</span>
+        </button>
+        <button type="button" class="btn-2">2</button>
+        <button type="button" class="btn-3">3</button>
+        <button type="button" class="btn-4">4</button>
+        <div class="bubble-tip animate__animated animate__slow">
+          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
+          standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to
+          make a type specimen book.
+        </div>
+      </div>
+      <img src="./img/stockphoto1.jpg" alt="image" />
+    </div>
+    <div><button type="button" class="nav-button">&times;</button></div>
+  </div>`,
+  };
+  const AudioPlaylist = {
+    name: "audio-playlist",
+    template: `<div> <audio controls> <source src="./assets/Loving-Grace-of-God.mp3" type="audio/mpeg"> Your browser does not support the audio element </audio> </div>`,
+  };
+  const FloatingWindow = {
+    name: "floating-window",
+    template: `<div id="hero-iframe-container" class="position-overridden">
+    <div class="hero-launcher-container active hwp-smart-container" style="transform: translate(-5px, -40px);">
+      <div class="hero-launcher-avatar-container active standard">
+        <section data-qa="launcher-icon-iframe" class="hero-launcher-avatar">
+          <div class="frame-root">
+            <div class="frame-content">
+              <div class="launcher standard"><button id="btn1" data-qa="launcher-icon-button" class="launcher-button"
+                  type="button" title="need assistance" style="background-color: rgb(0, 0, 0);"><span><svg width="40" height="40" fill="none"
+                      class="launcher-button-cross" style="stroke: white;">
+                      <path opacity="0.01" d="M6 6h28v28H6z"></path>
+                      <path d="M25 25l-5-5 5-5M15 25l5-5-5-5"></path>
+                    </svg>
+                    <div class="launcher-button-content">
+                      <div class="launcher-button-icon"><svg width="40" height="40" fill="none" class=""
+                          style="fill: white;">
+                          <path opacity="0.01" d="M6 6h28v28H6z"></path>
+                          <path clip-rule="evenodd"
+                            d="M25.243 21.28c-.783 0-1.418-.655-1.418-1.463s.635-1.464 1.418-1.464c.783 0 1.418.655 1.418 1.464 0 .808-.635 1.464-1.418 1.464zm-5.02 0c-.783 0-1.418-.655-1.418-1.463s.635-1.464 1.418-1.464c.783 0 1.417.655 1.417 1.464 0 .808-.634 1.464-1.417 1.464zm-5.02 0c-.784 0-1.418-.655-1.418-1.463s.634-1.464 1.418-1.464c.782 0 1.417.655 1.417 1.464 0 .808-.635 1.464-1.418 1.464zm12.015-9.126h-13.99c-2.305 0-4.173 1.885-4.173 4.21V28.99c0 .662.765 1.025 1.27.602l1.997-1.669a3.972 3.972 0 012.549-.927H27.218c2.305 0 4.172-1.885 4.172-4.21v-6.423c0-2.325-1.867-4.21-4.172-4.21z">
+                          </path>
+                        </svg></div>
+                    </div>
+                  </span></button></div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+    <div class="hero-plugin-container inactive" style="background-color: white;">
+      <section class="hero-plugin active">
+        <div style="height:80px; background-color: black;">
+          <button type="button" style="color: white;margin: 4px;" title="close window">X</button>
+        </div>
+      </section>
+    </div>
+  </div>`,
+    mounted() {
+      this.$nextTick(() => {
+        const btns = document.querySelectorAll("button");
+        btns.forEach((b) => {
+          b.addEventListener("click", (e) => {
+            // e.stopPropagation();
+            var con = document.querySelector(".hero-plugin-container");
+            con.classList.toggle("active");
+            con.classList.toggle("inactive");
+          });
+        });
+      });
+    },
+  };
   // var MyApp = {
   //     name: "my-app",
   //     template: "<div>Welcome! Use this to build a starting layout with Vue render option</div>"
@@ -368,35 +531,26 @@
         name = "$http";
       }
       axios.defaults.baseURL = store.getters.baseURL;
-      //axios.defaults.withCredentials = true;
       axios.interceptors.request.use(function (config) {
         // store.commit('addconnection');
         return config;
       });
       axios.interceptors.response.use(
-        function (config) {
+        function (success) {
           // store.commit('removeconnection');
-          // if (store.state.httpConnections == 0)
-          //     store.commit('pageloader', false);
-          return config;
+          return success;
         },
-        function (err) {
+        function (error) {
           // store.commit('removeconnection');
-          // if (store.state.httpConnections == 0)
-          //     store.commit('pageloader', false);
-          // switch (err.response.status) {
-          //     case 400:
-          //         store.commit("validationSummary/Errors", err.response.data);
-          //         break;
-          //     default:
-          //         store.dispatch("validationSummary/OnError", err)
-          //             .then(function () {
-          //             router.push("/error");
-          //         });
-          //         break;
-          // }
-          console.error(err);
-          return Promise.reject(err);
+          switch (err.response.status) {
+            case 400:
+              // show some sort of validation error
+              break;
+            default:
+              console.error(error);
+              break;
+          }
+          return Promise.reject(error);
         }
       );
       Object.defineProperty(vue.prototype, name, { value: axios });
@@ -434,6 +588,10 @@
     { path: "/binaryclock", component: BinaryClock },
     { path: "/metronomeplayer", component: MetronomePlayer },
     { path: "/resume", component: MyResume },
+    { path: "/toggleswitch", component: ToggleSwitch },
+    { path: "/bubbletip", component: BubbleTip },
+    { path: "/playlist", component: AudioPlaylist },
+    { path: "/help", component: FloatingWindow },
   ];
   var router = new VueRouter({
     routes: routes,

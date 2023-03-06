@@ -21,7 +21,7 @@ flyway.user=sa
 flyway.password=#{dbAdminPass}#
 ```
 
-> NOTE! NamedPipe Id is changed everytime LocalDB is restarted.
+> NOTE! NamedPipe Id is changed every time LocalDB is restarted.
 
 Now start the migration!
 ```

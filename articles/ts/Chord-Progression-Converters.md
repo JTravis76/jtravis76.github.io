@@ -1,3 +1,12 @@
+# Chord Progression Converters
+While working on a metronome player, I needed a way to compress/decompress a chord progression. Below is a sample snippet.
+
+The goal here is identified the chord and the number of beats that chord is used.
+Using `The Crawdad Song` as an example, this song is in the key of G with a 4/4 time signature.
+The `G` is the first chord letter and is counted 12 times in a 4/4 measure.
+
+```ts
+// Crawdad Song chord progression
 const progression = "G(12)D(4)G(4)C(4)G(2)D(2)G(4)";
 
 /** Convert a compress chord progression to a comma delimited string */
@@ -48,3 +57,4 @@ console.log(
         decompressChordProgression(progression)
     )
 );
+```
