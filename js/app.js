@@ -520,6 +520,11 @@
       });
     },
   };
+  // credit goes https://dev.to/alvaromontoro/how-to-create-a-progress-bar-with-html-and-css-1fl5
+  const ProgressBar = {
+    name: "progress-bar",
+    template: `<div role="progressbar" aria-valuenow="67" aria-valuemin="0" aria-valuemax="100" style="--value: 82"></div>`,
+  };
   // var MyApp = {
   //     name: "my-app",
   //     template: "<div>Welcome! Use this to build a starting layout with Vue render option</div>"
@@ -592,6 +597,7 @@
     { path: "/bubbletip", component: BubbleTip },
     { path: "/playlist", component: AudioPlaylist },
     { path: "/help", component: FloatingWindow },
+    { path: "/progressbar", component: ProgressBar },
   ];
   var router = new VueRouter({
     routes: routes,
