@@ -408,123 +408,6 @@
       },
     },
   };
-  const MetronomePlayer = {
-    name: "MetronomePlayer",
-    template: "",
-  };
-  var MyResume = {
-    name: "my-resume",
-    template: `<div>
-    <button type='button' class='button' title='print resume' @click='printMe()'><span class="fa fa-print"></button>
-    <iframe ref='iframe' src="/resume.html" width='100%' height='100%' title='my resume'></iframe></div>`,
-    mounted() {
-      const iframe = this.$refs.iframe;
-      iframe.onload = function () {
-        iframe.style.height =
-          (iframe.contentWindow.document.body.scrollHeight + 20).toString() +
-          "px";
-
-        iframe.style.width =
-          (iframe.contentWindow.document.body.scrollWidth + 20).toString() +
-          "px";
-      };
-    },
-    methods: {
-      printMe() {
-        const iframe = this.$refs.iframe;
-        iframe.contentWindow.print();
-      },
-    },
-  };
-  const ToggleSwitch = {
-    name: "toggle-switch",
-    template:
-      '<div class="toggle-switch--container"><input type="checkbox" name="switch" id="switch"><label for="switch"></label></div>',
-  };
-  const BubbleTip = {
-    name: "bubble-tip",
-    template: `
-    <div class="bubble-tip--wrapper">
-    <div><button type="button" class="nav-button">&times;</button></div>
-    <div class="bubble-tip--img-container">
-      <div class="bubble-tip--overlay">
-        <button type="button" class="btn-1">
-          <span>1</span>
-        </button>
-        <button type="button" class="btn-2">2</button>
-        <button type="button" class="btn-3">3</button>
-        <button type="button" class="btn-4">4</button>
-        <div class="bubble-tip animate__animated animate__slow">
-          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
-          standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to
-          make a type specimen book.
-        </div>
-      </div>
-      <img src="./img/stockphoto1.jpg" alt="image" />
-    </div>
-    <div><button type="button" class="nav-button">&times;</button></div>
-  </div>`,
-  };
-  const AudioPlaylist = {
-    name: "audio-playlist",
-    template: `<div> <audio controls> <source src="./assets/Loving-Grace-of-God.mp3" type="audio/mpeg"> Your browser does not support the audio element </audio> </div>`,
-  };
-  const FloatingWindow = {
-    name: "floating-window",
-    template: `<div id="hero-iframe-container" class="position-overridden">
-    <div class="hero-launcher-container active hwp-smart-container" style="transform: translate(-5px, -40px);">
-      <div class="hero-launcher-avatar-container active standard">
-        <section data-qa="launcher-icon-iframe" class="hero-launcher-avatar">
-          <div class="frame-root">
-            <div class="frame-content">
-              <div class="launcher standard"><button id="btn1" data-qa="launcher-icon-button" class="launcher-button"
-                  type="button" title="need assistance" style="background-color: rgb(0, 0, 0);"><span><svg width="40" height="40" fill="none"
-                      class="launcher-button-cross" style="stroke: white;">
-                      <path opacity="0.01" d="M6 6h28v28H6z"></path>
-                      <path d="M25 25l-5-5 5-5M15 25l5-5-5-5"></path>
-                    </svg>
-                    <div class="launcher-button-content">
-                      <div class="launcher-button-icon"><svg width="40" height="40" fill="none" class=""
-                          style="fill: white;">
-                          <path opacity="0.01" d="M6 6h28v28H6z"></path>
-                          <path clip-rule="evenodd"
-                            d="M25.243 21.28c-.783 0-1.418-.655-1.418-1.463s.635-1.464 1.418-1.464c.783 0 1.418.655 1.418 1.464 0 .808-.635 1.464-1.418 1.464zm-5.02 0c-.783 0-1.418-.655-1.418-1.463s.635-1.464 1.418-1.464c.783 0 1.417.655 1.417 1.464 0 .808-.634 1.464-1.417 1.464zm-5.02 0c-.784 0-1.418-.655-1.418-1.463s.634-1.464 1.418-1.464c.782 0 1.417.655 1.417 1.464 0 .808-.635 1.464-1.418 1.464zm12.015-9.126h-13.99c-2.305 0-4.173 1.885-4.173 4.21V28.99c0 .662.765 1.025 1.27.602l1.997-1.669a3.972 3.972 0 012.549-.927H27.218c2.305 0 4.172-1.885 4.172-4.21v-6.423c0-2.325-1.867-4.21-4.172-4.21z">
-                          </path>
-                        </svg></div>
-                    </div>
-                  </span></button></div>
-            </div>
-          </div>
-        </section>
-      </div>
-    </div>
-    <div class="hero-plugin-container inactive" style="background-color: white;">
-      <section class="hero-plugin active">
-        <div style="height:80px; background-color: black;">
-          <button type="button" style="color: white;margin: 4px;" title="close window">X</button>
-        </div>
-      </section>
-    </div>
-  </div>`,
-    mounted() {
-      this.$nextTick(() => {
-        const btns = document.querySelectorAll("button");
-        btns.forEach((b) => {
-          b.addEventListener("click", (e) => {
-            // e.stopPropagation();
-            var con = document.querySelector(".hero-plugin-container");
-            con.classList.toggle("active");
-            con.classList.toggle("inactive");
-          });
-        });
-      });
-    },
-  };
-  // credit goes https://dev.to/alvaromontoro/how-to-create-a-progress-bar-with-html-and-css-1fl5
-  const ProgressBar = {
-    name: "progress-bar",
-    template: `<div role="progressbar" aria-valuenow="67" aria-valuemin="0" aria-valuemax="100" style="--value: 82"></div>`,
-  };
   // var MyApp = {
   //     name: "my-app",
   //     template: "<div>Welcome! Use this to build a starting layout with Vue render option</div>"
@@ -591,13 +474,6 @@
     },
     { path: "/cards", component: CardSuffle },
     { path: "/binaryclock", component: BinaryClock },
-    { path: "/metronomeplayer", component: MetronomePlayer },
-    { path: "/resume", component: MyResume },
-    { path: "/toggleswitch", component: ToggleSwitch },
-    { path: "/bubbletip", component: BubbleTip },
-    { path: "/playlist", component: AudioPlaylist },
-    { path: "/help", component: FloatingWindow },
-    { path: "/progressbar", component: ProgressBar },
   ];
   var router = new VueRouter({
     routes: routes,
