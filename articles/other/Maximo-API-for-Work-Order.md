@@ -32,6 +32,23 @@ Body:
 }
 ```
 
+-------------------------
+## Query Maximo Data with LDAP Authentication
+
+If your Maximo instance is configured to use LDAP Authentication, you must use a slightly different HTTP Header 
+to supply the appropriate Maximo credentials. The other information, such as the URL and HTTP Method, remain the 
+same. In place of MAXAUTH, Authorization is used as the property in the HTTP Header. The same Base64 
+encoded username:password combination created earlier is also used for the value, however, this time it is 
+preceded with the word Basic and a space character.
+
+[base64 encoded jtravis:password]
+
+GET https://maximoqa.dqe.com/maxrest/rest/mbo/workorder?wonum=~eq~978779&_format=json
+Authorization: Basic anRyYXZpczpFYXN0ZXJEQHkyMDIzIQ==
+
+
+
+
 ## Additional Links
 GET /maximo/api.html
 GET /maximo/oslc/jsonschemas/MXAPIWO
@@ -43,6 +60,6 @@ GET /oslc/os/mxwo/{{workorderid}}/getlist~status?oslc.select=value&lean=1
 * https://www.ibm.com/support/pages/how-use-json-api-change-status-work-order
 * https://www.maximotimes.com/maximo/mif/query-data-with-the-maximo-rest-api/
 * https://studylib.net/doc/25661557/maximo-rest-api-guide
-vhttps://www.ibm.com/docs/en/memao/1.1.0?topic=imam-downloading-work-orders-by-using-maximo-mxapiwodetail-api
+* https://www.ibm.com/docs/en/memao/1.1.0?topic=imam-downloading-work-orders-by-using-maximo-mxapiwodetail-api
 * https://www.ibm.com/support/pages/using-prerequisite-tasks-maximo-utilities#:~:text=Prerequisite%20tasks%20are%20defined%20when,and%20Tasks%20(T%26D)%20application
 * https://www.ibm.com/support/pages/work-order-operations-are-now-tasks-overview-and-faq
