@@ -1,0 +1,75 @@
+# MVC FormCollection
+
+/*==================================
+ *  System.Web.Mvc.FormCollection
+ *=================================*/ 
+
+
+
+[HttpPost]
+public PartialViewResult GetParentCategoryBySearch(FormCollection frm)
+{
+
+//return the control Name
+    System.Diagnostics.Debug.Print(frm.Keys[0].ToString() );
+
+//returns the control Value
+string search = frm["txt-search-parent"].ToString();
+
+    return PartialView("_ParentCatTable", Enumerable.Empty<DataContexts.ParentCategory>() );
+}
+
+---------------------------------------------
+
+public static string SQlWhereStatement(System.Web.Mvc.FormCollection fc) {
+	System.Text.StringBuilder sb = new System.Text.StringBuilder();
+	Boolean isFiltered = false;
+	System.Globalization.CultureInfo culture = System.Globalization.CultureInfo.CreateSpecificCulture("en-US");
+	System.Globalization.DateTimeStyles styles = System.Globalization.DateTimeStyles.None;
+	DateTime dateResult;
+	sb.Clear();
+
+	foreach (string f in fc.AllKeys)
+	{
+		//f       <-gets form control Name
+		//fc[f]   <-gets form control Value
+		if (fc[f].ToString() != string.Empty)
+		{
+			//CheckBox
+			if (f.Substring(0, 2).ToLower() == "cb")
+			{
+				if (fc[f] != "false")
+				{
+					//do we include the "AND" statement?
+					if (isFiltered) { sb.Append(" AND "); }
+					//Set Boolean value to (1)
+					sb.Append("([" + f.Remove(0, 2) + "] = 1)");
+					isFiltered = true;
+				}
+			}
+			//TextBox / DropDown
+			if (f.Substring(0, 3).ToLower() == "txt" || f.Substring(0, 3).ToLower() == "ddl")
+			{
+				if (fc[f] != "")
+				{
+					//do we include the "AND" statement?
+					if (isFiltered) { sb.Append(" AND "); }
+					//check if a Date
+					if (DateTime.TryParse(fc[f], culture, styles, out dateResult))
+					{
+						sb.Append("([" + f.Remove(0, 3) + "] BETWEEN '" + fc[f] + " 00:00:00.000' AND '" + fc[f] + " 23:59:59.999')");
+						isFiltered = true;
+					}
+					else
+					{
+						//Build "LIKE" statement
+						sb.Append("([" + f.Remove(0, 3) + "] LIKE '%" + fc[f] + "%')");
+						isFiltered = true;
+					}
+				}
+			}
+		}
+	}
+	if (isFiltered) { sb.Insert(0, " WHERE "); }
+	return sb.ToString();
+}

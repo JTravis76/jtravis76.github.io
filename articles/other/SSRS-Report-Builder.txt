@@ -1,0 +1,46 @@
+# SSRS - Report Builder
+
+----------------------------------------
+# Page Break at Nth row in SSRS Report
+# http://hussain-msbi.blogspot.com/2012/07/page-break-at-nth-row-in-ssrs-report.html
+----------------------------------------
+Select the tablix
+In Group section, right-click -> Add Group -> Parent Group
+Name it something generic like "Group1"
+Click the fx button for the group properties
+For the expression, enter the following:
+	-Ceiling((RowNumber(Nothing)) / 15)
+	
+Note : You can put Nth number in place of 15. 
+For example if you want to your page break affect 
+after each 25th row than you have to put 25 in place of 15 
+	
+Define Page Break for the group:
+Under Group Properties, select Page Breaks from left menu.
+Check the option "Between each instance of a group"
+
+Personal Notes:
+When creating a group, it add a column to the tablix. This column is
+use to hold the index of the group. I found it better to set the cell to white font
+and squeeze the column width very tightly to hide the column.
+Doing helps avoid extra page breaks verus deleing the column and leaving the group.
+
+
+----------------------------------------
+# How to get rid of blank pages in PDF exported
+# http://stackoverflow.com/questions/362902/how-to-get-rid-of-blank-pages-in-pdf-exported-from-ssrs
+----------------------------------------
+To render in PDF correctly Body Width + Left margin + Right margin must be less than or equal to Page width. 
+When you see blank pages being rendered it is almost always because the body width plus margins is greater 
+than the page width.
+
+Remember: (Body Width + Left margin + Right margin) <= (Page width)
+
+Another option is to set the report property.
+ConsumeContainerWhitespace to True (the default is false)
+
+----------------------------------------
+# Alternate Row Color
+----------------------------------------
+
+=IIF(RowNumber(Nothing) MOD 2, "#e2ffa5", "White")

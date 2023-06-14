@@ -1,0 +1,41 @@
+# Common Commands
+
+With that, here are the common use cases for the Update-Package command:
+
+* Update a particular package in a project to the latest version:
+Update-Package jQuery -ProjectName MyProject
+
+
+* Update a particular package in a project to the latest version, using safe update rule:
+Update-Package jQuery -ProjectName MyProject -Safe
+
+
+* Update a particular package in a project to a particular version:
+Update-Package jQuery -ProjectName MyProject -Version 1.8
+
+
+* Update a particular package in all projects of the current solution to the latest version:
+Update-Package jQuery
+
+* Update a particular package in all projects of the current solution to a particular version:
+Update-Package jQuery -version 1.8
+
+
+* Reinstall a particular package in all projects of the current solution:
+Update-Package jQuery -reinstall
+
+
+* Update all packages in a project to the latest versions:
+Update-Package -ProjectName MyProject
+
+
+* Reinstall all packages in a project:
+Update-Package -ProjectName %MyProject% -reinstall
+
+
+* Update all packages in all projects of the current solution to the latest versions:
+Update-Package
+
+
+* Reinstall all packages in all projects of the current solution:
+Update-Package -Reinstall

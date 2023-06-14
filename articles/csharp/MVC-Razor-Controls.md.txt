@@ -1,0 +1,136 @@
+# MVC Razor Controls
+
+-----------------------------------
+# Fill Dropdown with static list
+----------------------------------
+@Html.DropDownList("DropDown1", new SelectList(
+	new List<Object>{ 
+	   new { value = 0 , text = "Red"  },
+	   new { value = 1 , text = "Blue" },
+	   new { value = 2 , text = "Green"}
+	},
+	"value",
+	"text",
+	Model.selectedValue), 
+        new { @onchange = "pageSize_Changed();" })
+
+	new { @class = "foo"}
+	new { @data_something = "foo"} // data attribute. just replace the hyphen with an underscore
+	
+-From controller:
+	//Fills the Status drop-down
+	List<SelectListItem> StatusItems = new List<SelectListItem>();
+	StatusItems.Add(new SelectListItem { Text = "", Value = "", Selected = true });
+OR
+	StatusItems.Add(new SelectListItem { Text = "", Value = "", Selected = true, Disabled = false, Group = new SelectListGroup { Disabled=false, Name="Group 1" } });
+	
+	ViewBag.Status = StatusItems;
+
+-From controller (option 2)
+	OCS.Models.OCSEntities db = new Models.OCSEntities();
+        ViewData["ddlOtGroup"] = (from c in db.tblOtGroups orderby c.idCode select new SelectListItem { Text = c.idCode.ToString(), Value = c.idCode.ToString() });
+	
+	(VIEW) also will add an empty blank to top of list
+	@Html.DropDownList("ddlOtGroup", string.Empty)
+
+-From controller (option 3)
+IEnumerable<SelectListItem> li;
+li = new SelectList(System.Web.Security.Roles.GetAllRoles());
+
+var myList = li.ToList();
+for (int i = 0; i < myList.Count; i++)
+{
+    if (myList[i].Text == "Administration")
+    {
+        myList[i].Selected = true;
+    }
+}
+ViewData["ddlRoles"] = myList.AsEnumerable();
+
+var list = new List<OCS.CheckBoxList>
+{
+    new CheckBoxList{ Index=0, Value="Administration", Name="Administration", Checked=false},
+    new CheckBoxList{ Index=1, Value="Canvasser", Name="Canvasser", Checked=true},
+    new CheckBoxList{ Index=1, Value="NCManager", Name="NCManager", Checked=false}
+};
+ViewData["cblRoles"] = list;
+
+-----------------------------------
+# TextBox w/ style
+-----------------------------------
+@Html.TextBox("txtCanvasser", null, new { style = "width:80px;", @readonly="readonly" })
+
+//With Bootstrap disabled
+@Html.TextBox("txtCanvasser", null, new { @class = "querybox" @disabled="disabled" })
+
+//retain value AFTER postback, use Request[]
+@Html.TextBox("txtCanvassId", Request["txtCanvassId"], new { @class = "GradientGrayInput" })
+
+//Using data- att
+//change data- to data_
+@Html.TextBox("txtCanvasser", null, new { @data_type="" })
+-----------------------------------
+# Using Ajax
+-----------------------------------
+<script src="~/Scripts/jquery.{Version}.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+
+@Ajax.ActionLink("UpdateMe", "GetTimeCard/78845", new AjaxOptions() { HttpMethod = "Get", UpdateTargetId = "timecard", InsertionMode = InsertionMode.Replace })
+<div id="timecard">@{ Html.RenderPartial("_TimeCard"); }</div>
+
+-----------------------------------
+# Custom Helpers
+-----------------------------------
+@helper MyCustom(string content)
+{
+    <label><mark>@content</mark></label>
+}
+
+
+-To use:
+@MyCustom("Custom Razor Helper") 
+
+
+
+-----------------------------------
+# Action Links with Parameters
+-----------------------------------
+@Html.ActionLink(
+    "Reply",                                                  // linkText
+    "BlogReplyCommentAdd",                                    // actionName
+    "Blog",                                                   // controllerName
+    new {                                                     // routeValues
+        blogPostId = blogPostId, 
+        replyblogPostmodel = Model, 
+        captchaValid = Model.AddNewComment.DisplayCaptcha 
+    },
+    null                                                      // htmlAttributes
+)
+
+
+-----------------------------------
+# Form tag usages
+-----------------------------------
+
+@using (Html.BeginForm("ACTION", "CONTROLLER", FormMethod.Post, new { @id = "form1" }))
+{ 
+
+}
+
+-----------------------------------
+# Short Date Format
+-----------------------------------
+@Html.Raw(string.Format("{0:MM/dd/yyyy}", r.dateScheduled))
+
+-----------------------------------
+# Currency Format
+-----------------------------------
+String.Format("{0:C}", 2.5)
+  = $2.50
+
+NOTE: use upper-case s in String
+
+
+
+@using System.Globalization
+String.Format(new CultureInfo("en-US"), "{0:C}", 1.2)
