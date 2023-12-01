@@ -1,0 +1,46 @@
+# Web.Config Options
+The `web.config` is a file located at the root of the website. This file is use to configure IIS for special properties.
+
+This sample demostrates the use of custom mime-types.
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+  <system.webServer>
+    <staticContent>
+        <clientCache cacheControlCustom="public" cacheControlMode="UseMaxAge" cacheControlMaxAge="365.00:00:00" />
+        <remove fileExtension=".md" />
+        <mimeMap fileExtension=".md" mimeType="text/plain" />
+    </staticContent>
+  </system.webServer>
+</configuration>
+```
+
+This sample demostrates the use of URL rewrite.
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+  <system.webServer>
+    <rewrite>
+      <rules>
+        <rule name="Main Rule" stopProcessing="true">
+          <match url=".*" />
+          <conditions logicalGrouping="MatchAll">
+            <add input="{REQUEST_FILENAME}" matchType="IsFile" negate="true" />
+            <add input="{REQUEST_FILENAME}" matchType="IsDirectory" negate="true" />
+          </conditions>
+          <action type="Rewrite" url="/index.html" />
+        </rule>
+      </rules>
+    </rewrite>
+  </system.webServer>
+  <location path="index.html">
+    <system.webServer>
+      <httpProtocol>
+        <customHeaders>
+          <add name="Cache-Control" value="no-cache, no-store, max-age=0" />
+        </customHeaders>
+      </httpProtocol>
+    </system.webServer>
+  </location>
+</configuration>
+```

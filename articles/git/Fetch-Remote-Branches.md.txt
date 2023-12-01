@@ -1,0 +1,12 @@
+# Fetch Remote Branches
+
+```bash
+## fetch all remote branches that has been merged; excludes selected branches
+git branch -r --merged | egrep -v "(^\*|master|staging|production)" | sed 's/origin\///'
+
+git log -1 --since='Jul 1, 2021' -s origin/10624_NewFeature
+
+
+git branch -r --merged | egrep -v "(^\*|master|staging)" | sed 's/origin\///' | xargs -n 1 git push origin --delete
+
+```

@@ -1,0 +1,19 @@
+# MS Graph Query
+
+ERR: Sorting not supported for current query.
+Cannot use Orderby with Filter
+https://graph.microsoft.com/v1.0/users?$top=10&$filter=startswith(displayName,'Conf')&$orderby=displayName
+
+https://graph.microsoft.com/v1.0/users?$top=10&$orderby=displayName
+
+----------------------
+https://learn.microsoft.com/en-us/graph/tutorials
+https://learn.microsoft.com/en-us/graph/tutorials/typescript-app-only?view=graph-rest-1.0&tabs=aad&tutorial-step=1
+https://github.com/microsoftgraph/msgraph-training-dotnet/blob/main/app-auth/GraphAppOnlyTutorial/GraphHelper.cs
+
+Auth as an Application vs a User
+https://github.com/microsoftgraph/msgraph-training-dotnet/tree/main/app-auth
+
+https://www.postman.com/microsoftgraph/workspace/microsoft-graph
+
+https://learn.microsoft.com/en-us/dotnet/api/system.linq.expressions.expression.add?view=net-7.0

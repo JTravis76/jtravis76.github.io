@@ -1,0 +1,114 @@
+# Azure Function Returns
+While working with data, I ran into an error, "Newtonsoft.Json: Self referencing loop detected for property".
+This was a bit confusing due to NET 6 and using the newer `System.Text.Json`.
+
+I found that IActionResult is part of teh MVC family and under the hood, it uses Newtonsoft.Json.
+However, it seems that Azure Functions would NOT honor the settings within the Startup.cs
+
+Below are my notes to my findings.
+
+```c#
+//Startup.cs
+services
+    .AddDbContext<DataContext>(options => options.UseSqlServer(dbConnString))
+    .Configure<JsonSerializerOptions>(opt =>
+    {
+        opt.PropertyNameCaseInsensitive = true;
+        opt.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+        opt.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+    })
+    .Configure<Newtonsoft.Json.JsonSerializerSettings>(opt =>
+    {
+        opt.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+        opt.PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.None;
+    });
+```
+
+
+```c#
+[FunctionName("GetCircuitGroupWithEquipment")]
+public async Task<IActionResult> GetCircuitGroupWithEquipment(
+    [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "CircuitGroupWithEquipment/{id}")]
+    HttpRequest req,
+    ILogger log,
+    [FromRoute] string id
+)
+{
+    try
+    {
+        _ = int.TryParse(id, out var circuitId);
+
+        // == option 1
+        // -- Newtonsoft.Json: Self referencing loop detected for property 'circuitGroup' with type 'FacilityRatings.Api.Entities.CircuitGroup'. Path 'equipmentInstances[0]'.
+        //return new JsonResult(await _circuitService.GetCircuitGroupWithEquipmentsAsync(circuitId));
+
+        // == option 2
+        // -- System.Private.CoreLib: Exception while executing function: GetCircuitGroupWithEquipment. FacilityRatings.Api: Method not found: 'Void Microsoft.AspNetCore.Mvc.JsonResult..ctor(System.Object, Newtonsoft.Json.JsonSerializerSettings)'.
+        //return new JsonResult(await _circuitService.GetCircuitGroupWithEquipmentsAsync(circuitId),
+        //    new Newtonsoft.Json.JsonSerializerSettings()
+        //    {
+        //        ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore,
+        //        PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.None
+        //    });
+
+        // == option 3
+        // -- WORKS
+        //var circuitGroup = await _circuitService.GetCircuitGroupWithEquipmentsAsync(circuitId);
+        //var content = Newtonsoft.Json.JsonConvert.SerializeObject(circuitGroup,
+        //    new Newtonsoft.Json.JsonSerializerSettings()
+        //    {
+        //        ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore,
+        //        PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.None
+        //    });
+        //return new JsonResult(Newtonsoft.Json.JsonConvert.DeserializeObject(content));
+
+        // == option 4
+        // -- WORKS
+        //var circuitGroup = await _circuitService.GetCircuitGroupWithEquipmentsAsync(circuitId);
+        //string content = System.Text.Json.JsonSerializer.Serialize(circuitGroup,
+        //    new System.Text.Json.JsonSerializerOptions()
+        //    {
+        //        PropertyNameCaseInsensitive = true,
+        //        PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+        //        ReferenceHandler = ReferenceHandler.IgnoreCycles,
+        //    });
+        //return new HttpResponseMessage(System.Net.HttpStatusCode.OK)
+        //{
+        //    Content = new StringContent(content, System.Text.Encoding.UTF8, "application/json")
+        //};
+
+        // == Option 5
+        // -- WORKS
+        return new JsonResult(
+            SerializerJson(await _circuitService.GetCircuitGroupWithEquipmentsAsync(circuitId))
+        );
+
+    }
+    catch (Exception ex)
+    {
+        return new ObjectResult(ex.Message) { StatusCode = StatusCodes.Status500InternalServerError };
+        //return new HttpResponseMessage(System.Net.HttpStatusCode.InternalServerError)
+        //{
+        //    Content = new StringContent(ex.Message, System.Text.Encoding.UTF8, "text/pain")
+        //};
+    }
+}
+```
+
+```c#
+/// <summary>
+/// Utility that serializer the JSON object based on JsonSerializerSettings
+/// </summary>
+/// <param name="data">object to serializer</param>
+/// <returns></returns>
+public static object SerializerJson(object data)
+{
+    var content = Newtonsoft.Json.JsonConvert.SerializeObject(data,
+        new Newtonsoft.Json.JsonSerializerSettings()
+        {
+            ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore,
+            PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.None
+        });
+    return Newtonsoft.Json.JsonConvert.DeserializeObject(content);
+}
+```
