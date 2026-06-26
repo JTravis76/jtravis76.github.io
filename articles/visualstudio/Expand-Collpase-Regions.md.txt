@@ -1,0 +1,7 @@
+# Expand / Collapse Regions
+
+ALL Regions
+CTRL + M, CTRL + A
+
+All Methods
+CTRL + M, CTRL + O

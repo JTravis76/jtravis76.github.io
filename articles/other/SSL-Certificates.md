@@ -60,6 +60,20 @@ $cert.PrivateKey
 $cert.PrivateKey.ToXmlString($false)
 $store.Close()
 
+$store = New-Object System.Security.Cryptography.X509Certificates.X509Store([System.Security.Cryptography.X509Certificates.StoreName]::My,"CurrentUser") #LocalMachine
+$store.Open("MaxAllowed")
+$cert = $store.Certificates | ?{$_.subject -match "^CN=localhost"}
+
+foreach($c in $cert)
+{
+    Write-Host 'Subject' $c.Subject
+    Write-Host 'Expired:' $c.NotAfter
+    Write-Host 'Thumbprint:' $c.Thumbprint
+    Write-Host ''
+}
+
+$store.Close()
+
 certutil -mergepfx "C:\JeremyTravis.cer" "C:\JeremyTravis.pfx"
 
 $pwd = ConvertTo-SecureString -String "password1234" -Force -AsPlainText
@@ -79,7 +93,10 @@ Below are the steps to create the cert + key in Node format.
 
 ```ps
 # Export the Key (must have password!)
-openssl pkcs12 -in localhost.pfx -nocerts -passin pass:password -out localhostkey.pem -noenc
+openssl pkcs12 -in localhost.pfx -nocerts -passin pass:password -out localhost.key.pem -noenc
 
-openssl pkcs12 -in localhost.pfx -nokeys -passin pass:password -out localhostcert.pem -noenc
+openssl pkcs12 -in localhost.pfx -nokeys -passin pass:password -out localhost.cert.pem -noenc
 ```
+
+openssl pkcs12 -in localhost.pfx -nocerts -out localhost.key -nodes -passin pass:password
+openssl pkcs12 -in localhost.pfx -nokeys -out localhost.crt -clcerts -passin pass:password

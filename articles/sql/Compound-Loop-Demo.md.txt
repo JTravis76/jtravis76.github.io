@@ -1,0 +1,45 @@
+select * from [Location]
+select * from [Equipment]
+select * from [Panel]
+
+/*
+DECLARE @EQUIPID INT = 1;
+DECLARE @PANELID INT = 1;
+
+DECLARE @LocationCNT INT = 1;
+WHILE @LocationCNT <= 5
+BEGIN
+	PRINT '-LOCATION: ' + CONVERT(VARCHAR, @LocationCNT)
+
+  DECLARE @EquipmentCNT INT = @EQUIPID;
+  DECLARE @E INT = (SELECT ROUND(1 + (RAND() * 3), 0));
+  IF @E = 0 SET @E = 1;
+  SET @E = @E + @EQUIPID;
+  WHILE @EquipmentCNT <= @E
+  BEGIN
+	PRINT '--EQUIPMENT: ' + CONVERT(VARCHAR, @EquipmentCNT)
+
+	DECLARE @PanelCNT INT = @PANELID;
+	DECLARE @P INT = (SELECT ROUND(1 + (RAND() * 2), 0));
+	IF @P = 0 SET @P = 1;
+	SET @P = @P + @PANELID;
+	WHILE @PanelCNT <= @P
+	BEGIN
+		PRINT '---PANEL: ' + CONVERT(VARCHAR, @PanelCNT)
+		SET @PanelCNT += 1;
+		IF @PanelCNT > @P
+		BEGIN
+		  SET @PANELID = @PanelCNT
+		END
+	END
+
+    SET @EquipmentCNT += 1;
+    IF @EquipmentCNT > @E
+    BEGIN
+      SET @EQUIPID = @EquipmentCNT
+    END
+ END
+
+  SET @LocationCNT += 1;
+END
+*/

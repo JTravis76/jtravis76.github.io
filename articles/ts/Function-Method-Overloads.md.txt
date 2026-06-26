@@ -1,0 +1,41 @@
+# Function Method Overload Signatures
+
+I wanted to see how to create a function overload signature in TypeScript.
+
+
+```ts
+interface ICompanyPager { Items: ICompany[] }
+interface ICompany { id: number; name: string }
+
+class CompaniesResource { v1 = new CompaniesV1() }
+class CompanyResource { v1 = new CompanyV1(); v2 = new CompanyV2() }
+class CompaniesV1 {
+    // Overload signatures
+    get(PageSize: number, PageNumber: number, Search?: string | null): ICompanyPager;
+    get(id: number): ICompany;
+    // Single implementation
+    get(PageSize: number, PageNumber?: number, Search?: string | null): ICompanyPager | ICompany {
+        if(PageNumber) {
+            return { Items: [] } as ICompanyPager
+        }
+        return { id: 1, name: "company 1" } 
+    }
+}
+
+class CompanyV1 {
+    get(id: number) { return { id: 1, name: "company 1" } }
+}
+class CompanyV2 {
+    get(id: number) { return { id: 1, name: "company 1" } }
+}
+
+const controller = {
+    companies: new CompaniesResource(),
+    company: new CompanyResource(),
+    cameras: {},
+    camera: { get: () => {} }
+}
+controller.company.v1.get(1);
+controller.companies.v1.get(10, 2);
+controller.company.v2.get(1)
+```

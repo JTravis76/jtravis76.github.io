@@ -1,0 +1,13 @@
+# Short Cuts and Tips
+
+Collapse or Expand Current Section: CTRL + M + M
+
+Collapse Current Selection: CTRL + M + H
+
+Collapse All Sections: CTRL + M + O
+
+Collapse All Sections Including Headings: CTRL + M + A
+
+Expand All Sections: CTRL + M + X
+
+Toggle All Sections: CTRL + M + L

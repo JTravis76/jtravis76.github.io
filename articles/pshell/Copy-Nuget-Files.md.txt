@@ -1,0 +1,27 @@
+# Copy Cached Nuget Files
+
+I need a way to transfer the Nuget packages from my local cached directory to a server without internet.
+This way I can restore and build my project.
+
+```ps
+Clear-Host
+
+$items = Get-ChildItem -Path "C:\Users\travije\.nuget\packages" -Recurse
+$files = $items | where {$_.Extension -eq ".nupkg"}
+
+foreach($file in $files)
+{
+    Copy-Item -Path $file.FullName -Destination ("C:\Users\travije\.nuget\LocalNuget\" + $file.Name)
+}
+```
+
+```ps
+Clear-Host
+
+$files = Get-ChildItem -Path "C:\Users\travije\.nuget\packages" -Filter *.nupkg -Recurse
+
+foreach ($file in $files)
+{
+    Copy-Item -Path $file.FullName -Destination ("C:\Users\travije\.nuget\LocalNuget\" + $file.Name)
+}
+```

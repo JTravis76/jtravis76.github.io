@@ -1,0 +1,9 @@
+# Dates in JavaScript
+
+- To get the timezone offset
+
+```ts
+const offset = new Date().getTimezoneOffset() / 60 * -1;
+
+console.log(offset); // Expected: -4
+```

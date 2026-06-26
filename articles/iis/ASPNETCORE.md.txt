@@ -1,0 +1,7 @@
+Running and debug ASP.NET Core apps in IIS Express
+
+You can check if you have the module in your IIS Express configuration file %\PROGRAMFILES(x86)%\IIS Express\config\templates\PersonalWebServer\applicationhost.config . If there is at least one of the following lines, then you have the module installed:
+
+<add name="AspNetCoreModule"...
+<add name="AspNetCoreModuleV2"...
+

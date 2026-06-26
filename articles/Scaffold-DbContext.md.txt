@@ -1,0 +1,11 @@
+Scaffold DB Context
+
+Below is a command used to scaffold the database context for SSHQ.
+I would like to setup for Care One.
+
+This is to be ran from NuGet Manager PowerShell.
+There might be a NuGet package required.
+
+```
+scaffold-dbcontext -connection name=eServicesScaffold Microsoft.EntityFrameworkCore.SqlServer -OutputDir "eServices/Model" -Context "eServicesEntities" -Namespace "Stanley.EServices.Web5.Data.Model" -DataAnnotations -Force  -Project Stanley.EServices.Web5.Data -UseDatabaseNames -StartupProject Stanley.EServices.Web5.HQ.WebAPI -NoOnConfiguring
+```

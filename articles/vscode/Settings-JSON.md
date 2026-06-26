@@ -1,14 +1,19 @@
 # Visual Studio Code Settings
 This is a backup of my settings.json and extensions for Visual Studio Code.
 
-* Deno: denoland
-* ESLINT: Microsoft
-* Prettier - Code Formatter: Prettier
+* Deno: denoland [denoland.vscode-deno]
+* ESLINT: Microsoft [dbaeumer.vscode-eslint]
+* httpYac - Rest Client: Andreas Weber [anweber.vscode-httpyac]
+* Live Server: Ritwick Dey [ritwickdey.liveserver]
+* Prettier - Code Formatter: Prettier [esbenp.prettier-vscode]
 * Redis: Dunn
-* Spell Right: Bartosz Antosik
-* Thunder Client: Ranga Vadhineni
+* Sass (.sass only) Syler [syler.sass-indented]
+* Spell Right: Bartosz Antosik [ban.spellright]
+* SQL Server: Microsoft [ms-mssql.mssql]
+* Svg Preview: Simon Siefke [simonsiefke.svg-preview]
+* Thunder Client: Ranga Vadhineni [rangav.vscode-thunder-client]
 * Vetur: Pine Wu
-* Volar: Vue
+* Volar: Vue [vue.volar]
 
 
 ```json
@@ -17,12 +22,14 @@ This is a backup of my settings.json and extensions for Visual Studio Code.
   "editor.detectIndentation": false,
   "editor.quickSuggestionsDelay": 1000,
   "editor.codeActionsOnSave": {
-    "source.fixAll": true,
-    "source.fixAll.stylelint": true
+    "source.fixAll": "always",
+    "source.fixAll.stylelint": "always"
   },
   "editor.formatOnSave": true,
   "editor.tabCompletion": "onlySnippets",
   "editor.tabSize": 2,
+  "editor.stickyScroll.enabled": false,
+  "editor.unicodeHighlight.ambiguousCharacters": false,
   "eslint.format.enable": true,
   "eslint.validate": [
     "vue",
@@ -57,11 +64,10 @@ This is a backup of my settings.json and extensions for Visual Studio Code.
     }
   },
   "team.showWelcomeMessage": false,
+  "terminal.integrated.defaultProfile.windows": "Command Prompt",
   //"terminal.integrated.shell.windows": "C:\\Windows\\System32\\cmd.exe",
-  "terminal.integrated.cwd": "C:\\Users\\jtravis\\repos",
+  //"terminal.integrated.cwd": "C:\\Users\\PROFILE\\repos",
   "typescript.updateImportsOnFileMove.enabled": "always",
-  "vetur.format.options.tabSize": 4,
-  "vetur.format.options.useTabs": true,
   "window.zoomLevel": 0,
   "workbench.colorTheme": "Default Dark+",
   "workbench.editor.enablePreview": false,
@@ -71,7 +77,7 @@ This is a backup of my settings.json and extensions for Visual Studio Code.
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[javascript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "vscode.typescript-language-features"
   },
   "[typescript]": {
     "editor.defaultFormatter": "vscode.typescript-language-features"
@@ -83,10 +89,14 @@ This is a backup of my settings.json and extensions for Visual Studio Code.
     "editor.defaultFormatter": "vscode.json-language-features"
   },
   "[html]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "vscode.html-language-features"
   },
   "[scss]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
-  }
+  },
+  "[css]": {
+    "editor.defaultFormatter": "vscode.css-language-features"
+  },
+  "vue.server.hybridMode": false,
 }
 ```

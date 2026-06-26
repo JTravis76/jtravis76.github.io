@@ -14,3 +14,15 @@ Category:vscode
     "scope": "vue"
 }
 ```
+```json
+  "vue template": {
+    "prefix": [
+      "vue-template"
+    ],
+    "body": [
+      "<template>\n  <div></div>\n</template>\n\n<script lang=\"ts\">\nimport { defineComponent } from \"vue\";\n\nexport default defineComponent({\n  name: \"MyComponent\",\n});\n</script>\n\n<style lang=\"scss\" scoped></style>"
+    ],
+    "description": "create a vue 3 (option API) template with TS support",
+    "scope": "vue"
+  }
+```

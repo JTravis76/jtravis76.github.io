@@ -1,0 +1,7 @@
+# Exporting Git Commits
+
+## Full commit
+git archive --format=zip --output=commit.zip 64b4ed794b1e84905f41e0dbd09d563b2398a0eb
+
+## The changes ONLY with directory structure
+git archive -o changes.zip HEAD $(git diff --name-only 64b4ed794b1e84905f41e0dbd09d563b2398a0eb^..64b4ed794b1e84905f41e0dbd09d563b2398a0eb)

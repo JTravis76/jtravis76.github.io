@@ -21,6 +21,7 @@ Table of Content
 * CONDA: One way of getting the current record from a workflow
 * Add DEFAULT constraint
 * Add description to column in table
+* Rename a Table
 
 
 #------------------------------------------
@@ -378,4 +379,10 @@ EXEC sys.sp_addextendedproperty
 @level1name=N'FacilityBillingProvider',
 @level2type=N'COLUMN',
 @level2name=N'FacilityBillingProvider_ID'
+
+#------------------------------------------------
+# Rename a Table
+#------------------------------------------------
+EXEC sp_rename 'dbo.AlertRule.SourceKey', 'zSourceKey';
+EXEC sp_rename 'dbo.AlertRule.zSourceKey', 'SourceKey';
 

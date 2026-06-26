@@ -1,0 +1,16 @@
+# UTC TimeZone Offset
+
+```c#
+/* two options:
+ * - Full timezone name: 'Eastern Standard Time'
+ * - offset value as double: -4
+ */
+
+DateTime maxDateTime1 = TimeZoneInfo.ConvertTimeFromUtc(
+    DateTime.UtcNow,
+    TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time")); // NOT "EST"
+
+// -12 to +12 range
+double timeZoneOffset = -4;
+DateTime maxDateTime = DateTime.UtcNow.AddHours(timeZoneOffset);
+```

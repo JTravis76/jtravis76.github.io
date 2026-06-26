@@ -1,0 +1,3 @@
+--To resolve issue with VS not starting IIS or host, try cmd below.
+net stop winnat
+net start winnat

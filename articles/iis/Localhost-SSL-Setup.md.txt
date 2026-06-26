@@ -1,0 +1,48 @@
+# HTTPS - Running Secure Local Host
+
+
+### Creating Certificate - Windows
+
+NOTE: If you already have a localhost certificate installed, you can export and convert (See Exporting Certificate).
+
+```powershell
+# Important! This is a two part script. Execute the first part to get the thumbprint.
+# Then execute the second part to export with password.
+
+#-----------
+# Generating a new certificate and saving to the Certificate Store.
+# This will return a thumbprint of the certificate.
+# NOTE: A new certificate can only be installed into MY store.
+$date_now = Get-Date
+$extended_date = $date_now.AddYears(2)
+New-SelfSignedCertificate -DnsName "localhost" -NotAfter $extended_date -KeyAlgorithm RSA -KeyLength 2048 -CertStoreLocation "cert:LocalMachine\My"
+
+#-----------
+# Exporting the certificate
+# Copy the output thumprint from the command above.
+# Optional: change the password and/or filename
+$thumbprint = "A43879F1C8CEE69A805FB3DFF0664A39C78349B4"
+$pwd = ConvertTo-SecureString -String "password" -Force -AsPlainText
+$path = ("cert:\localMachine\my\" + $thumbprint)
+Export-PfxCertificate -cert $path -FilePath C:\localhost.pfx -Password $pwd
+```
+
+### Exporting Certificate - Windows
+
+Below are the steps to create the cert + key in PEM format.
+
+- Open mmc -> Certificates (Local Computer)
+- Expand to `Personal -> Certificates`. Look for localhost.
+- Right-click -> All Tasks.. -> Export
+- Select "Yes, export the private key" and provide a password
+
+Open MMC and copy certificate into the 'Trusted Root Certification Authorities'
+
+```ps
+# Export the Key (must have password!)
+openssl pkcs12 -in localhost.pfx -nocerts -out localhost.key -noenc -passin pass:password
+
+openssl pkcs12 -in localhost.pfx -nokeys -out localhost.crt -noenc -passin pass:password
+```
+
+

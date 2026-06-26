@@ -1,0 +1,168 @@
+# Running PowerShell script as a Pre Build Task
+
+```xml
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<Configurations>Debug;Release;</Configurations>
+	</PropertyGroup>
+	
+	<Target Name="RunCustomScript" BeforeTargets="PreBuildEvent">
+		<Exec Command="powershell -ExecutionPolicy Bypass -File $(ProjectDir)scripts\write-permission-constants.ps1 -Dir $(ProjectDir)" />
+	</Target>
+</Project>
+```
+
+```pshell
+param(
+    [string]$Dir = ""
+)
+
+Clear-Host
+
+Function Get-DB-Results {
+[cmdletbinding()]
+Param([string]$Server, [string]$Database, [string]$User = "", [string]$Password = "", [string]$Query)
+    Process
+    {
+        try
+        {
+            # Build connection string
+            if ([string]::IsNullOrWhiteSpace($User) -or [string]::IsNullOrWhiteSpace($Password)) {
+                # Windows Authentication
+                $connectionString = "Server=$Server;Database=$Database;Integrated Security=True;TrustServerCertificate=true;"
+            }
+            else {
+                # SQL Authentication
+                $connectionString = "Server=$Server;Database=$Database;User ID=$User;Password=$Password;TrustServerCertificate=true;"
+            }
+
+            #return  @(
+            #    [PSCustomObject]@{ ConstName = "ThreeSixty"; Name = "Three Sixty" },
+            #    [PSCustomObject]@{ ConstName = "CompanywideNotifications"; Name = "Companywide Notifications" }
+            #)
+
+            # Create and open SQL connection
+            $connection = New-Object System.Data.SqlClient.SqlConnection
+            $connection.ConnectionString = $connectionString
+            $connection.Open()
+
+            # Create SQL command
+            $command = $connection.CreateCommand()
+            $command.CommandText = $Query
+
+            # Execute query and load results into DataTable
+            $adapter = New-Object System.Data.SqlClient.SqlDataAdapter $command
+            $dataTable = New-Object System.Data.DataTable
+            [void]$adapter.Fill($dataTable)
+
+            # Output results
+            if ($dataTable.Rows.Count -eq 0)
+            {
+                Write-Host "No rows returned." -ForegroundColor Yellow
+            }
+            else
+            {
+                $rows = foreach ($row in $dataTable.Rows)
+                {
+                    $obj = @{}
+                    foreach ($col in $dataTable.Columns) {
+                        $obj[$col.ColumnName] = $row[$col.ColumnName]
+                    }
+                    [PSCustomObject]$obj
+                }
+                return $rows;
+            }
+        }
+        catch
+        {
+            Write-Host "Error: $($_.Exception.Message)" -ForegroundColor Red
+        }
+        finally
+        {
+            # Ensure connection is closed
+            if ($connection.State -eq 'Open') {
+                $connection.Close()
+            }
+            $connection.Dispose()
+        }
+    }
+}
+
+# ---------------------------
+
+Function Write-Permission-Constants {
+[cmdletbinding()]
+Param ([string]$Path, [PSCustomObject[]]$List)
+    Process 
+    {
+        Clear-Host
+        $sb = [System.Text.StringBuilder]::new();
+
+        $sb.AppendLine("/* =========================================")
+        $sb.AppendLine(" * Do not edit!! This file is auto-generate.")
+        $sb.AppendLine(" * ========================================= */")
+
+        $sb.AppendLine("");
+        $sb.AppendLine("namespace Stanley.EServices.Web5.Common.Constants");
+        $sb.AppendLine("{");
+
+        $sb.AppendLine("    /// <summary>");
+        $sb.AppendLine("    /// Permission Class");
+        $sb.AppendLine("    /// </summary>");
+        $sb.AppendLine("    public class Permissions");
+        $sb.AppendLine("    {");
+
+        $idx = 0;
+        foreach($l in $List)
+        {
+            $sb.AppendLine("        /// <summary>");
+            $sb.AppendLine("        /// " + $l.Name + " - " + $l.Type);
+            $sb.AppendLine("        /// </summary>");
+            $sb.AppendLine('        public const string ' + $l.ConstName +' = "' + $l.Name + '";');
+            $idx++;
+
+            if ($idx -ne $List.Length)
+            {
+                $sb.AppendLine("");
+            }
+        }
+
+        $sb.AppendLine("    }");
+
+        $sb.Append("}");
+
+        #Write-Host $sb.ToString();
+        Set-Content -Path $Path -Value $sb.ToString() -Force -Encoding UTF8
+    }
+}
+
+# ---------------------------
+
+$outputPath = ($Dir.Replace("Data\", "Common\") + "Constants\Permissions.cs");
+
+<# Define connection parameters 
+$server   = "(localdb)\MSSQLLocalDB"   # e.g., "localhost\SQLEXPRESS"
+$database = "eServices_NA_Local"
+$user     = ""      # Leave empty if using Windows Authentication
+$password = ""      # Leave empty if using Windows Authentication
+#>
+
+$query = "SELECT REPLACE(REPLACE(REPLACE(REPLACE([p].[Name], N' ', N''), N'/', N''), N'-', N''), N'&', N'') AS [ConstName], [p].[Name], N'PermissionHQs' AS [Type]
+FROM [PermissionHQ] AS [p]
+UNION
+SELECT REPLACE(REPLACE(REPLACE(REPLACE([a].[Name], N' ', N''), N'/', N''), N'-', N''), N'&', N'') AS [ConstName], [a].[Name], N'AdminPermissions' AS [Type]
+FROM [AdminPermission] AS [a]"
+
+
+<#
+$list = @(
+    [PSCustomObject]@{ ConstName = "ThreeSixty"; Name = "Three Sixty" },
+    [PSCustomObject]@{ ConstName = "CompanywideNotifications"; Name = "Companywide Notifications" }
+)
+#>
+$list = Get-DB-Results -Server $server -Database $database -User $user -Password $password -Query $query
+
+Write-Permission-Constants -Path $outputPath -List $list
+
+```

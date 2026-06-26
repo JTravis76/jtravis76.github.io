@@ -1,0 +1,38 @@
+# SSL Custom Domain for IIS-Express and Local Development
+
+While performing some automated testing, I needed a way to run our applications in a local sandbox environment.
+Since I was already using IIS Express (installed from Visual Studio), I thought that would be a good start.
+It turns out that VS binds a localhost cert to the port range; 44300 - 44399.
+I needed to reserve one port for my custom domain.
+Below is a PS script to remove ALL the port/sslcert bindings.
+Create a new self-signed cert with my custom domain.
+Assigned cert to single port.
+
+As for the VS Localhost, I needed to reassign those.
+I copied the thumbprint value and loop through the remaining ports.
+
+
+
+#netsh http show sslcert
+
+$cert = New-SelfSignedCertificate -DnsName "*.sandbox.local", "*.sandbox.local" -CertStoreLocation "cert:\LocalMachine\My" -NotAfter (Get-Date).AddYears(5)
+$thumb = $cert.GetCertHashString()
+
+netsh http delete sslcert ipport=0.0.0.0:44300
+netsh http add sslcert ipport=0.0.0.0:44300 certhash=$thumb appid=`{214124cd-d05b-4309-9af9-9caa44b2b74a`}
+
+#For ($i=44300; $i -le 44399; $i++) {
+#netsh http delete sslcert ipport=0.0.0.0:$i
+#}
+
+#For ($i=44301; $i -le 44399; $i++) {
+#netsh http add sslcert ipport=0.0.0.0:$i certhash=$thumb appid=`{214124cd-d05b-4309-9af9-9caa44b2b74a`}
+#}
+
+$StoreScope = 'LocalMachine'
+$StoreName = 'root'
+
+$Store = New-Object -TypeName System.Security.Cryptography.X509Certificates.X509Store -ArgumentList $StoreName, $StoreScope
+$Store.Open([System.Security.Cryptography.X509Certificates.OpenFlags]::ReadWrite)
+$Store.Add($cert)
+$Store.Close()

@@ -1,0 +1,5 @@
+# Using CURL
+
+```
+curl -X POST -H "Content-Type: application/json" --json "{\"EmailAddress\":\"user@domain.com\",\"Password\":\"PASSWORD!\"}" "https://dev-api.domain.com/api/Authenticate"
+```

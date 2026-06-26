@@ -1,0 +1,57 @@
+# Opens a new window/tab with POST
+
+I needed a way to open a new tab while posting some data to the route. Althought, this could be done
+easily with 
+
+```html
+<form method="post" action="/controller/action" target="_blank" ></form>
+```
+
+I first needed to validate the for prior to opening the new tab. So, the initial form post check for 
+validation errors on the server-side. If all good, set the variable state `IsVaild` to true.
+Then return the model state back to the client. After the javascript is rendered, the function is executed.
+
+```ts
+/** Opens a new window/tab with POST 
+ * param url 
+ * param data  a key/pair object { id: "0" }
+*/
+function openNewWithPost(url: string, data: {[key: string]: string}) {
+    var form = document.createElement("form");
+    form.target = "_blank";
+    form.method = "POST";
+    form.action = url;
+    form.style.display = "none";
+
+    for (var key in data) {
+        var input = document.createElement("input");
+        input.type = "hidden";
+        input.name = key;
+        input.value = data[key];
+        form.appendChild(input);
+    }
+    document.body.appendChild(form);
+    form.submit();
+    document.body.removeChild(form);
+}
+
+openNewWithPost("/controller/action", { id: "0", name: "Johnny Blaze"})
+```
+
+
+MVC Razor Example
+```cshtml
+@section Scripts
+{
+    <script>
+        $(document).ready(function () 
+        {
+            const isValid = JSON.parse("@Model.IsValid".toLowerCase());
+            if (isValid) {
+                const filters = JSON.parse('@Html.Raw(Model.ToFiltersJson)');
+                openNewWithPost("@Url.Content("~/AuditReports/BySystemUserReport")", filters);
+            }
+        });
+    </script>
+}
+```

@@ -1,0 +1,7 @@
+# EF Query to SQL query
+
+```c#
+var data = context.Products.OrderBy(x => x.sales > 10);
+
+Console.WriteLine(data.ToQueryString());
+```

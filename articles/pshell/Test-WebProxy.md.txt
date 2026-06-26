@@ -1,0 +1,14 @@
+# Test Proxy Server for Web Request
+
+
+
+$body = @{
+    email = "a@b.com"
+    password = "Password"
+} | ConvertTo-Json -Depth 10
+
+$headers = @{
+  "Content-Type" = "application/json"
+}
+
+Invoke-WebRequest -Uri https://api.domain.com/v1/auth -Body $body -Headers $headers -Method POST -Proxy http://proxy.domain.net:8888 -UseBasicParsing

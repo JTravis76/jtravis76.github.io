@@ -1,0 +1,21 @@
+# Find Duplicates in an Array of Objects
+
+const data = [
+  { AlertID: 1 },
+  { AlertID: 1 }
+];
+
+const seen = new Set();
+const duplicates = new Set();
+
+let arr = data.map(x => x.AlertID);
+
+for (const item of arr) {
+    if (seen.has(item)) {
+        duplicates.add(item);
+    } else {
+        seen.add(item);
+    }
+}
+
+console.log(Array.from(duplicates))

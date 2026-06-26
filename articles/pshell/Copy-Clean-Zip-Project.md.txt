@@ -1,0 +1,46 @@
+# Copy, Clean, and Compress a Visual Studio Projects
+
+I needed to copy some project files to a remote server without outside access to the internet.
+Below is a script to flush the destination directory, copy fresh files, then zip them.
+
+```powershell
+Clear-Host
+
+$root =  "$env:USERPROFILE\repos\"
+$dest = "securitas-ecc-hq-webapi\"
+$src = "stanley-hq-webapi\"
+
+$directories = [System.Collections.Generic.List[string]]::new()
+$directories.Add("Stanley.EServices.Web5.ApiRequest")
+$directories.Add("Stanley.EServices.Web5.ApiResponse")
+$directories.Add("Stanley.EServices.Web5.Common")
+$directories.Add("Stanley.EServices.Web5.Data")
+$directories.Add("Stanley.EServices.Web5.HQ.WebApi")
+$directories.Add("Stanley.EServices.Web5.Infrastructure.Repository")
+$directories.Add("Stanley.EServices.Web5.Infrastructure.Services")
+$directories.Add("Stanley.EServices.Web5.Service")
+
+
+foreach($d in $directories)
+{
+    if(Test-Path $d -PathType Container)
+    {
+        Remove-Item -Path ($root + $dest + $d) -Recurse
+    }
+
+    Copy-Item -Path ($root + $src + $d) -Destination ($root + $dest + $d) -Recurse
+}
+
+$folders = Get-ChildItem -Path ($root + $dest) -Directory -Recurse
+
+foreach ($f in $folders)
+{
+    if ($f.Name -eq "bin" -or $f.Name -eq "obj")
+    {
+        Remove-Item -Path $f.FullName -Recurse
+    }
+}
+
+Compress-Archive -Path ($root + $dest + $directories[0]),($root + $dest + $directories[1]),($root + $dest + $directories[2]),($root + $dest + $directories[3]),($root + $dest + $directories[4]),($root + $dest + $directories[5]),($root + $dest + $directories[6]),($root + $dest + $directories[7]) -CompressionLevel Fastest -DestinationPath ($root + $dest + "project.zip")
+
+```

@@ -1,0 +1,18 @@
+# Dynamic Filtering in EF Core
+
+```c#
+string filters = "{\"LicenseLevel\":\"Premium\"}";
+
+var response = someSvc.GetData().ToList();
+
+if (!string.IsNullOrWhiteSpace(filters))
+{
+    Dictionary<string, string> json = JsonConvert.DeserializeObject<Dictionary<string, string>>(filters);
+    var q = response.AsEnumerable(); // switch to in-memory to use reflection
+
+    q = q.Where(x => json.All(f => ((string)x.GetType().GetProperty(f.Key)?.GetValue(x)) != null));
+    q = q.Where(x => json.All(f => ((string)x.GetType().GetProperty(f.Key)?.GetValue(x)).Contains(f.Value, System.StringComparison.CurrentCultureIgnoreCase)));
+
+    response = q.ToList();
+}
+```

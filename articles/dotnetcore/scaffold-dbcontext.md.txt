@@ -1,0 +1,54 @@
+Here’s a complete guide to using Scaffold-DbContext in Entity Framework Core to reverse-engineer a SQL Server database into C# entity classes and a DbContext.
+
+1. Prerequisites
+.NET SDK installed (6.0 or later recommended)
+EF Core Tools installed:
+
+```bash
+dotnet tool install --global dotnet-ef
+```
+
+NuGet packages for SQL Server provider:
+```bash
+dotnet add package Microsoft.EntityFrameworkCore.SqlServer
+dotnet add package Microsoft.EntityFrameworkCore.Tools
+```
+
+## 2. Basic Command
+Run this in your project directory:
+
+```bash
+dotnet ef dbcontext scaffold "Server=YOUR_SERVER;Database=YOUR_DB;Trusted_Connection=True;TrustServerCertificate=True;" Microsoft.EntityFrameworkCore.SqlServer
+```
+
+Explanation:
+
+"Server=...;Database=...;..." → Your SQL Server connection string.
+Microsoft.EntityFrameworkCore.SqlServer → EF Core provider for SQL Server.
+
+## 3. Common Options
+You can customize scaffolding with these flags:
+
+Option	Description
+-o Models	Output directory for entity classes.
+-c MyDbContext	Custom name for the generated DbContext.
+--schema dbo	Scaffold only a specific schema.
+--table Table1 Table2	Scaffold only specific tables.
+--data-annotations	Use attributes instead of Fluent API.
+--force	Overwrite existing files.
+
+Example:
+```bash
+dotnet ef dbcontext scaffold "Server=localhost;Database=TestDB;Trusted_Connection=True;TrustServerCertificate=True;" Microsoft.EntityFrameworkCore.SqlServer -o Models -c TestDbContext --schema dbo --force
+```
+
+## 4. PowerShell Package Manager Console Alternative
+If you’re in Visual Studio:
+
+```powershell
+Scaffold-DbContext "Server=localhost;Database=TestDB;Trusted_Connection=True;TrustServerCertificate=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models -Context TestDbContext -Schemas dbo -Force
+```
+## 5. Notes & Best Practices
+Security: Avoid hardcoding credentials; use dotnet user-secrets or environment variables.
+Partial Classes: EF Core generates partial classes so you can extend them without losing changes when re-scaffolding.
+Regeneration: If the DB schema changes, re-run the scaffold command with --force to update models.

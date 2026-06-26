@@ -1,0 +1,8 @@
+# Exporting and Importing Azure Database
+
+We are able to use SqlPackage to export and import databases to/from Azure using the following commands.
+
+```
+SqlPackage /Action:Export /SourceServerName:localhost /SourceDatabaseName:MyDB /TargetFile:MyDB.bacpac
+SqlPackage /Action:Import /TargetServerName:tcp:SERVER1.database.windows.net /TargetDatabaseName:DATABASE1 /TargetUser:USER1 /TargetPassword:PASSWORD1 /SourceFile:C:\Users\travije\Downloads\CareOne-2026-3-28-2-52.bacpac
+```
